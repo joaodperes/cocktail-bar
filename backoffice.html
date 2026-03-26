@@ -67,10 +67,7 @@
   <script src="js/utils.js"></script>
   <script>
     (function () {
-      // ── CONFIG: change your password here ──────────
-      const BACKOFFICE_PASSWORD = "letmein";
-      // ───────────────────────────────────────────────
-
+      const BACKOFFICE_PASSWORD = "%%BO_PASSWORD_HASH%%";
       const SESSION_KEY = "bo_unlocked";
 
       applyTranslations();
@@ -102,9 +99,10 @@
       unlockBtn.addEventListener("click", attempt);
       pwInput.addEventListener("keydown", e => { if (e.key === "Enter") attempt(); });
 
-      function attempt() {
+      async function attempt() {
         const val = pwInput.value;
-        if (val === BACKOFFICE_PASSWORD) {
+        const hash = await sha256(val);
+        if (hash === BACKOFFICE_PASSWORD) {
           pwError.classList.remove("visible");
           unlock();
         } else {
@@ -112,6 +110,13 @@
           pwInput.value = "";
           pwInput.focus();
         }
+      }
+
+      async function sha256(message) {
+        const msgBuffer = new TextEncoder().encode(message);
+        const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
       }
 
       document.getElementById("logout-btn").addEventListener("click", lock);

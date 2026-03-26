@@ -16,16 +16,6 @@
     </div>
   </nav>
 
-  <!--
-    Hidden Netlify form — required so Netlify registers the form at deploy time.
-    Do NOT remove this even though it's hidden.
-  -->
-  <form name="drink-request" netlify netlify-honeypot="bot-field" hidden>
-    <input name="cocktail" />
-    <input name="requester" />
-    <input name="bot-field" />
-  </form>
-
   <main>
     <div class="detail-wrapper" id="detail-content">
       <div class="loading" id="loading"></div>
@@ -151,10 +141,15 @@
               "bot-field": ""
             });
 
-            const res = await fetch("/", {
+            const res = await fetch("https://api.web3forms.com/submit", {
               method: "POST",
-              headers: { "Content-Type": "application/x-www-form-urlencoded" },
-              body: body.toString()
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                access_key: "%%WEB3FORMS_KEY%%",
+                subject: `🍹 Drink request: ${name}`,
+                cocktail: name,
+                requester: requester
+              })
             });
 
             if (!res.ok) throw new Error("Network error");

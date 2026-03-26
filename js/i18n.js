@@ -103,7 +103,7 @@ const TRANSLATIONS = {
 };
 
 function getLang() {
-  return localStorage.getItem("lang") || "en";
+  return localStorage.getItem("lang") || "pt";
 }
 
 function setLang(lang) {
@@ -112,7 +112,7 @@ function setLang(lang) {
 
 function t(key) {
   const lang = getLang();
-  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS["en"][key] || key;
+  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS["pt"][key] || key;
 }
 
 function applyTranslations() {
