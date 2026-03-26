@@ -1,6 +1,9 @@
 // build.js
 const fs = require("fs");
 
+// Create dist/ if it doesn't exist
+fs.mkdirSync("dist", { recursive: true });
+
 const replacements = {
   "%%WEB3FORMS_KEY%%": process.env.WEB3FORMS_KEY || "",
   "%%BO_PASSWORD_HASH%%": process.env.BO_PASSWORD_HASH || "",
@@ -14,7 +17,6 @@ const replacements = {
   fs.writeFileSync(`dist/${file}`, content);
 });
 
-// Copy everything else into dist/
 ["index.html", "css", "js", "images", "cocktails.json"].forEach(item => {
   fs.cpSync(item, `dist/${item}`, { recursive: true });
 });
