@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cocktail — The Bar</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand" data-i18n="nav_home">The Bar</a>
+    <div class="nav-actions">
+      <a href="backoffice.html" class="nav-link" data-i18n="nav_backoffice">Staff</a>
+      <button class="lang-btn" id="lang-toggle"></button>
+    </div>
+  </nav>
+
+  <!--
+    Hidden Netlify form — required so Netlify registers the form at deploy time.
+    Do NOT remove this even though it's hidden.
+  -->
+  <form name="drink-request" netlify netlify-honeypot="bot-field" hidden>
+    <input name="cocktail" />
+    <input name="requester" />
+    <input name="bot-field" />
+  </form>
+
+  <main>
+    <div class="detail-wrapper" id="detail-content">
+      <div class="loading" id="loading"></div>
+    </div>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    (function () {
+      applyTranslations();
+      initLangToggle("lang-toggle");
+
+      const GLASS_ICONS = {
+        rocks: "🥃", martini: "🍸", flute: "🥂",
+        highball: "🥤", coupe: "🍷", wine: "🍷",
+        hurricane: "🍹", collins: "🧉"
+      };
+
+      const params = new URLSearchParams(location.search);
+      const id = params.get("id");
+      const lang = getLang();
+
+      async function render() {
+        const container = document.getElementById("detail-content");
+
+        if (!id) { location.href = "index.html"; return; }
+
+        let cocktails;
+        try {
+          cocktails = await loadCocktails();
+        } catch {
+          container.innerHTML = `<a href="index.html" class="back-link" data-i18n="detail_back">${t("detail_back")}</a><p>${t("gallery_empty")}</p>`;
+          return;
+        }
+
+        const c = cocktails.find(x => x.id === id);
+        if (!c) { location.href = "index.html"; return; }
+
+        const name = c.name[lang] || c.name.en;
+        document.title = `${name} — The Bar`;
+
+        const glassKey = "glass_" + (c.glass || "rocks");
+        const glassLabel = t(glassKey);
+        const icon = GLASS_ICONS[c.glass] || "🍹";
+
+        const imgHtml = c.image
+          ? `<img class="detail-image" src="${c.image}" alt="${name}" onerror="this.outerHTML='<div class=\\'detail-image-placeholder\\'>${icon}</div>'">`
+          : `<div class="detail-image-placeholder">${icon}</div>`;
+
+        const ingredientsHtml = c.ingredients.map(ing => {
+          const ingName = ing.name[lang] || ing.name.en;
+          return `
+            <li class="ingredient-row">
+              <span class="ingredient-name">${ingName}</span>
+              <span class="ingredient-qty">${ing.quantity}</span>
+            </li>`;
+        }).join("");
+
+        container.innerHTML = `
+          <a href="index.html" class="back-link">${t("detail_back")}</a>
+
+          ${imgHtml}
+
+          <h1 class="detail-title">${name}</h1>
+          <div class="detail-badges">
+            <span class="badge">${glassLabel}</span>
+            <span class="badge ${c.ice ? "ice" : ""}">${c.ice ? t("detail_ice_yes") : t("detail_ice_no")}</span>
+          </div>
+
+          <div class="detail-section">
+            <p class="section-label">${t("detail_ingredients")}</p>
+            <ul class="ingredients-list">${ingredientsHtml}</ul>
+          </div>
+
+          <div class="detail-section">
+            <div class="request-form" id="request-form">
+              <div>
+                <label class="form-label" for="requester-name">${t("detail_your_name")}</label>
+                <input
+                  class="form-input"
+                  id="requester-name"
+                  type="text"
+                  name="requester"
+                  maxlength="80"
+                  autocomplete="given-name"
+                  placeholder="${t("detail_name_placeholder")}"
+                />
+              </div>
+              <p class="form-error" id="form-error"></p>
+              <button class="btn-primary" id="submit-btn" type="button">${t("detail_submit")}</button>
+            </div>
+
+            <div class="form-success" id="form-success">
+              <h3>${t("detail_success_title")}</h3>
+              <p>${t("detail_success_msg")}</p>
+            </div>
+          </div>
+        `;
+
+        // Submit handler
+        document.getElementById("submit-btn").addEventListener("click", async () => {
+          const nameInput = document.getElementById("requester-name");
+          const errorEl  = document.getElementById("form-error");
+          const btn      = document.getElementById("submit-btn");
+
+          const requester = nameInput.value.trim();
+          errorEl.classList.remove("visible");
+
+          if (!requester) {
+            nameInput.focus();
+            return;
+          }
+
+          btn.disabled = true;
+          btn.textContent = "…";
+
+          try {
+            const body = new URLSearchParams({
+              "form-name": "drink-request",
+              "cocktail":  name,
+              "requester": requester,
+              "bot-field": ""
+            });
+
+            const res = await fetch("/", {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: body.toString()
+            });
+
+            if (!res.ok) throw new Error("Network error");
+
+            document.getElementById("request-form").style.display = "none";
+            document.getElementById("form-success").classList.add("visible");
+
+          } catch {
+            errorEl.textContent = t("detail_error");
+            errorEl.classList.add("visible");
+            btn.disabled = false;
+            btn.textContent = t("detail_submit");
+          }
+        });
+
+        // Allow submit on Enter
+        document.getElementById("requester-name")?.addEventListener("keydown", e => {
+          if (e.key === "Enter") document.getElementById("submit-btn").click();
+        });
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Bar</title>
+  <meta name="description" content="Request your cocktail for the evening." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand" data-i18n="nav_home">The Bar</a>
+    <div class="nav-actions">
+      <a href="backoffice.html" class="nav-link" data-i18n="nav_backoffice">Staff</a>
+      <button class="lang-btn" id="lang-toggle"></button>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <h1 data-i18n="gallery_title">Tonight's Menu</h1>
+    <p data-i18n="gallery_subtitle">Choose your poison.</p>
+  </header>
+
+  <main>
+    <div class="gallery-grid" id="gallery">
+      <div class="loading" id="loading"></div>
+    </div>
+  </main>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    (function () {
+      applyTranslations();
+      initLangToggle("lang-toggle");
+
+      const GLASS_ICONS = {
+        rocks: "🥃", martini: "🍸", flute: "🥂",
+        highball: "🥤", coupe: "🍷", wine: "🍷",
+        hurricane: "🍹", collins: "🧉"
+      };
+
+      async function render() {
+        const lang = getLang();
+        const gallery = document.getElementById("gallery");
+
+        let cocktails;
+        try {
+          cocktails = await loadCocktails();
+        } catch {
+          gallery.innerHTML = `<p class="gallery-empty" data-i18n="gallery_empty">${t("gallery_empty")}</p>`;
+          return;
+        }
+
+        const availableRaw = getAvailableIngredients();
+        const availableSet = availableRaw !== null ? new Set(availableRaw.map(s => s.toLowerCase())) : null;
+
+        const visible = cocktails.filter(c => cocktailIsAvailable(c, availableSet));
+
+        gallery.innerHTML = "";
+
+        if (visible.length === 0) {
+          gallery.innerHTML = `<p class="gallery-empty">${t("gallery_empty")}</p>`;
+          return;
+        }
+
+        visible.forEach((c, i) => {
+          const name = c.name[lang] || c.name.en;
+          const glassKey = "glass_" + (c.glass || "rocks");
+          const glassLabel = t(glassKey);
+          const icon = GLASS_ICONS[c.glass] || "🍹";
+
+          const card = document.createElement("a");
+          card.href = `cocktail.html?id=${encodeURIComponent(c.id)}`;
+          card.className = "card";
+          card.style.animationDelay = `${i * 60}ms`;
+
+          const imgContent = c.image
+            ? `<img src="${c.image}" alt="${name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-image-placeholder\\'>${icon}</div>'">`
+            : `<div class="card-image-placeholder">${icon}</div>`;
+
+          card.innerHTML = `
+            <div class="card-image">${imgContent}</div>
+            <div class="card-body">
+              <div class="card-name">${name}</div>
+              <div class="card-meta">
+                <span class="badge">${glassLabel}</span>
+                ${c.ice ? `<span class="badge ice">${lang === "pt" ? "Gelo" : "Ice"}</span>` : ""}
+              </div>
+              <div class="card-cta" data-i18n="gallery_request">${t("gallery_request")}</div>
+            </div>
+          `;
+          gallery.appendChild(card);
+        });
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>

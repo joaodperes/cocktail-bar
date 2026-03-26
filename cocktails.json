@@ -1,0 +1,81 @@
+[
+  {
+    "id": "negroni",
+    "name": { "en": "Negroni", "pt": "Negroni" },
+    "image": "images/negroni.jpg",
+    "glass": "rocks",
+    "ice": true,
+    "ingredients": [
+      { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "30ml" },
+      { "name": { "en": "Sweet Vermouth", "pt": "Vermute Doce" }, "quantity": "30ml" },
+      { "name": { "en": "Campari", "pt": "Campari" }, "quantity": "30ml" }
+    ]
+  },
+  {
+    "id": "aperol-spritz",
+    "name": { "en": "Aperol Spritz", "pt": "Aperol Spritz" },
+    "image": "images/aperol-spritz.jpg",
+    "glass": "wine",
+    "ice": true,
+    "ingredients": [
+      { "name": { "en": "Aperol", "pt": "Aperol" }, "quantity": "60ml" },
+      { "name": { "en": "Prosecco", "pt": "Prosecco" }, "quantity": "90ml" },
+      { "name": { "en": "Soda Water", "pt": "Água com Gás" }, "quantity": "30ml" },
+      { "name": { "en": "Orange Slice", "pt": "Rodela de Laranja" }, "quantity": "1" }
+    ]
+  },
+  {
+    "id": "espresso-martini",
+    "name": { "en": "Espresso Martini", "pt": "Martini de Espresso" },
+    "image": "images/espresso-martini.jpg",
+    "glass": "martini",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Vodka", "pt": "Vodka" }, "quantity": "50ml" },
+      { "name": { "en": "Coffee Liqueur", "pt": "Licor de Café" }, "quantity": "30ml" },
+      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30ml" },
+      { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "10ml" }
+    ]
+  },
+  {
+    "id": "mojito",
+    "name": { "en": "Mojito", "pt": "Mojito" },
+    "image": "images/mojito.jpg",
+    "glass": "highball",
+    "ice": true,
+    "ingredients": [
+      { "name": { "en": "White Rum", "pt": "Rum Branco" }, "quantity": "50ml" },
+      { "name": { "en": "Lime Juice", "pt": "Sumo de Lima" }, "quantity": "30ml" },
+      { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "20ml" },
+      { "name": { "en": "Fresh Mint", "pt": "Hortelã Fresca" }, "quantity": "8 leaves" },
+      { "name": { "en": "Soda Water", "pt": "Água com Gás" }, "quantity": "Top up" }
+    ]
+  },
+  {
+    "id": "french-75",
+    "name": { "en": "French 75", "pt": "French 75" },
+    "image": "images/french-75.jpg",
+    "glass": "flute",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "30ml" },
+      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "15ml" },
+      { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "10ml" },
+      { "name": { "en": "Champagne", "pt": "Champagne" }, "quantity": "60ml" }
+    ]
+  },
+  {
+    "id": "pornstar-martini",
+    "name": { "en": "Pornstar Martini", "pt": "Pornstar Martini" },
+    "image": "images/pornstar-martini.jpg",
+    "glass": "coupe",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Vanilla Vodka", "pt": "Vodka de Baunilha" }, "quantity": "50ml" },
+      { "name": { "en": "Passionfruit Liqueur", "pt": "Licor de Maracujá" }, "quantity": "20ml" },
+      { "name": { "en": "Passion Fruit Purée", "pt": "Polpa de Maracujá" }, "quantity": "30ml" },
+      { "name": { "en": "Lime Juice", "pt": "Sumo de Lima" }, "quantity": "15ml" },
+      { "name": { "en": "Prosecco", "pt": "Prosecco" }, "quantity": "25ml" }
+    ]
+  }
+]

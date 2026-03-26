@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Backoffice — The Bar</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <meta name="robots" content="noindex, nofollow" />
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand" data-i18n="nav_home">The Bar</a>
+    <div class="nav-actions">
+      <a href="index.html" class="nav-link" data-i18n="nav_home">The Bar</a>
+      <button class="lang-btn" id="lang-toggle"></button>
+    </div>
+  </nav>
+
+  <!-- Password gate -->
+  <div id="gate-screen">
+    <div class="password-gate">
+      <h2 data-i18n="bo_title">Backoffice</h2>
+      <p data-i18n="bo_subtitle">Manage ingredient availability</p>
+      <label class="form-label" for="pw-input" data-i18n="bo_password_label">Password</label>
+      <input
+        class="form-input"
+        id="pw-input"
+        type="password"
+        autocomplete="current-password"
+        data-i18n-placeholder="bo_password_placeholder"
+      />
+      <p class="password-error" id="pw-error" data-i18n="bo_wrong_password"></p>
+      <br/><br/>
+      <button class="btn-primary" id="unlock-btn" data-i18n="bo_unlock">Unlock</button>
+    </div>
+  </div>
+
+  <!-- Main backoffice (hidden until unlocked) -->
+  <div id="bo-main" style="display:none;">
+    <div class="backoffice-wrapper">
+      <div class="bo-header">
+        <div class="bo-header-text">
+          <h2 data-i18n="bo_ingredients_title">Available Ingredients</h2>
+          <p data-i18n="bo_ingredients_desc">Tick the ingredients you currently have in stock.</p>
+        </div>
+        <button class="btn-ghost" id="logout-btn" data-i18n="bo_logout">Lock</button>
+      </div>
+
+      <div class="bo-controls">
+        <button class="btn-ghost" id="select-all-btn" data-i18n="bo_select_all">Select all</button>
+        <button class="btn-ghost" id="deselect-all-btn" data-i18n="bo_deselect_all">Deselect all</button>
+      </div>
+
+      <div class="ingredients-panel" id="ingredients-panel">
+        <div class="loading" id="bo-loading"></div>
+      </div>
+
+      <div class="bo-actions">
+        <button class="btn-primary" id="save-btn" data-i18n="bo_save">Save Changes</button>
+        <span class="save-status" id="save-status" data-i18n="bo_saved">Saved!</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    (function () {
+      // ── CONFIG: change your password here ──────────
+      const BACKOFFICE_PASSWORD = "letmein";
+      // ───────────────────────────────────────────────
+
+      const SESSION_KEY = "bo_unlocked";
+
+      applyTranslations();
+      initLangToggle("lang-toggle");
+
+      const lang = getLang();
+
+      // Check if already unlocked in this session
+      function isUnlocked() {
+        return sessionStorage.getItem(SESSION_KEY) === "1";
+      }
+      function unlock() {
+        sessionStorage.setItem(SESSION_KEY, "1");
+        showMain();
+      }
+      function lock() {
+        sessionStorage.removeItem(SESSION_KEY);
+        document.getElementById("gate-screen").style.display = "";
+        document.getElementById("bo-main").style.display = "none";
+        document.getElementById("pw-input").value = "";
+        document.getElementById("pw-error").classList.remove("visible");
+      }
+
+      // Gate logic
+      const pwInput  = document.getElementById("pw-input");
+      const pwError  = document.getElementById("pw-error");
+      const unlockBtn = document.getElementById("unlock-btn");
+
+      unlockBtn.addEventListener("click", attempt);
+      pwInput.addEventListener("keydown", e => { if (e.key === "Enter") attempt(); });
+
+      function attempt() {
+        const val = pwInput.value;
+        if (val === BACKOFFICE_PASSWORD) {
+          pwError.classList.remove("visible");
+          unlock();
+        } else {
+          pwError.classList.add("visible");
+          pwInput.value = "";
+          pwInput.focus();
+        }
+      }
+
+      document.getElementById("logout-btn").addEventListener("click", lock);
+
+      if (isUnlocked()) showMain();
+
+      // ── Main panel ──────────────────────────────────
+      async function showMain() {
+        document.getElementById("gate-screen").style.display = "none";
+        document.getElementById("bo-main").style.display = "";
+
+        let cocktails;
+        try {
+          cocktails = await loadCocktails();
+        } catch {
+          document.getElementById("ingredients-panel").innerHTML = "<p style='padding:1rem;color:var(--cream-dim)'>Failed to load cocktails.json</p>";
+          return;
+        }
+
+        const ingredientMap = getAllUniqueIngredients(cocktails);
+        const savedRaw      = getAvailableIngredients();
+        const savedSet      = savedRaw !== null
+          ? new Set(savedRaw.map(s => s.toLowerCase()))
+          : new Set(ingredientMap.keys()); // default: all checked
+
+        // Count how many cocktails use each ingredient
+        const usageCount = new Map();
+        ingredientMap.forEach((_, key) => usageCount.set(key, 0));
+        cocktails.forEach(c => {
+          c.ingredients.forEach(ing => {
+            const k = ing.name.en.toLowerCase();
+            usageCount.set(k, (usageCount.get(k) || 0) + 1);
+          });
+        });
+
+        // Build checkboxes
+        const panel = document.getElementById("ingredients-panel");
+        panel.innerHTML = "";
+        [...ingredientMap.entries()].sort((a, b) => a[0].localeCompare(b[0])).forEach(([key, names]) => {
+          const label    = names[lang] || names.en;
+          const count    = usageCount.get(key) || 0;
+          const checked  = savedSet.has(key);
+          const row = document.createElement("label");
+          row.className  = "ingredient-check-row";
+          row.innerHTML  = `
+            <input type="checkbox" data-key="${key}" ${checked ? "checked" : ""}>
+            <span class="ingredient-check-label">${label}</span>
+            <span class="cocktail-count">${count} cocktail${count !== 1 ? "s" : ""}</span>
+          `;
+          panel.appendChild(row);
+        });
+
+        // Select / deselect all
+        document.getElementById("select-all-btn").addEventListener("click", () => {
+          panel.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = true);
+        });
+        document.getElementById("deselect-all-btn").addEventListener("click", () => {
+          panel.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = false);
+        });
+
+        // Save
+        const saveBtn    = document.getElementById("save-btn");
+        const saveStatus = document.getElementById("save-status");
+
+        saveBtn.addEventListener("click", () => {
+          const checked = [...panel.querySelectorAll("input[type=checkbox]:checked")].map(cb => cb.dataset.key);
+          setAvailableIngredients(new Set(checked));
+
+          saveStatus.classList.add("visible");
+          setTimeout(() => saveStatus.classList.remove("visible"), 2000);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
