@@ -6,6 +6,8 @@
   <title>The Bar</title>
   <meta name="description" content="Request your cocktail for the evening." />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="shortcut icon" href="images/favicon.svg">
 </head>
 <body>
 
@@ -53,7 +55,7 @@
           return;
         }
 
-        const availableRaw = getAvailableIngredients();
+        const availableRaw = await getAvailableIngredients();
         const availableSet = availableRaw !== null ? new Set(availableRaw.map(s => s.toLowerCase())) : null;
 
         const visible = cocktails.filter(c => cocktailIsAvailable(c, availableSet));

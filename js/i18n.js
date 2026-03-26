@@ -49,6 +49,17 @@ const TRANSLATIONS = {
     bo_select_all: "Select all",
     bo_deselect_all: "Deselect all",
     bo_logout: "Lock",
+
+    // Backoffice tabs
+    bo_tab_ingredients: "Ingredients",
+    bo_tab_missing:     "Missing cocktails",
+    bo_tab_shopping:    "Shopping list",
+    bo_ingredients_desc_short: "Tick the ingredients you currently have in stock.",
+    bo_shopping_desc:   "Select the cocktails you want to prepare. Ingredients you already have are excluded.",
+    bo_all_available:   "All cocktails are currently available.",
+    bo_shopping_empty:  "Select cocktails above to generate a shopping list.",
+    bo_needed_for:      "needed for",
+    bo_all_owned:       "You already have everything needed!",
   },
   pt: {
     // Nav
@@ -58,7 +69,7 @@ const TRANSLATIONS = {
 
     // Gallery
     gallery_title: "Menu de Hoje",
-    gallery_subtitle: "Escolha o seu veneno.",
+    gallery_subtitle: "O que é que se bebe aqui?",
     gallery_empty: "Nada disponível de momento — volte mais tarde.",
     gallery_request: "Pedir este cocktail",
 
@@ -99,11 +110,22 @@ const TRANSLATIONS = {
     bo_select_all: "Seleccionar tudo",
     bo_deselect_all: "Limpar selecção",
     bo_logout: "Bloquear",
+
+    // Backoffice tabs
+    bo_tab_ingredients: "Ingredientes",
+    bo_tab_missing:     "Cocktails em falta",
+    bo_tab_shopping:    "Lista de compras",
+    bo_ingredients_desc_short: "Seleccione os ingredientes que tem em stock.",
+    bo_shopping_desc:   "Seleccione os cocktails que quer preparar. Ingredientes que já tem são excluídos.",
+    bo_all_available:   "Todos os cocktails estão disponíveis de momento.",
+    bo_shopping_empty:  "Seleccione cocktails acima para gerar a lista de compras.",
+    bo_needed_for:      "necessário para",
+    bo_all_owned:       "Já tem tudo o que precisa!",
   }
 };
 
 function getLang() {
-  return localStorage.getItem("lang") || "pt";
+  return localStorage.getItem("lang") || "en";
 }
 
 function setLang(lang) {
@@ -112,7 +134,7 @@ function setLang(lang) {
 
 function t(key) {
   const lang = getLang();
-  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS["pt"][key] || key;
+  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || TRANSLATIONS["en"][key] || key;
 }
 
 function applyTranslations() {

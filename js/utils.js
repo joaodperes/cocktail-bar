@@ -2,15 +2,26 @@
 
 const AVAILABLE_KEY = "available_ingredients";
 
-function getAvailableIngredients() {
+async function getAvailableIngredients() {
   try {
-    const raw = localStorage.getItem(AVAILABLE_KEY);
-    return raw ? JSON.parse(raw) : null; // null = never set (show all)
-  } catch { return null; }
+    const res = await fetch("/.netlify/functions/get-availability");
+    const data = await res.json();
+    return data; // null means never set; array means set
+  } catch {
+    return null;
+  }
 }
 
-function setAvailableIngredients(set) {
-  localStorage.setItem(AVAILABLE_KEY, JSON.stringify(Array.from(set)));
+async function setAvailableIngredients(set, passwordHash) {
+  const res = await fetch("/.netlify/functions/set-availability", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-password-hash": passwordHash
+    },
+    body: JSON.stringify([...set])
+  });
+  return res.ok;
 }
 
 function cocktailIsAvailable(cocktail, availableSet) {

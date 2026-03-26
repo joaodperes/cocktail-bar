@@ -5,7 +5,169 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Backoffice — The Bar</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
   <meta name="robots" content="noindex, nofollow" />
+  <style>
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      color: var(--cream-dim);
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tab-btn:hover { color: var(--cream); }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Missing cocktails tab */
+    .cocktail-missing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .cocktail-missing-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+    .missing-ingredients { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .ing-badge {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+    }
+    .ing-badge.have {
+      color: var(--gold-dim);
+      border: 1px solid var(--border);
+    }
+    .ing-badge.missing {
+      color: #c85c5c;
+      border: 1px solid rgba(200,92,92,0.35);
+      background: rgba(200,92,92,0.08);
+    }
+
+    /* Shopping list tab */
+    .shopping-cocktail-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid rgba(200,167,106,0.07);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .shopping-cocktail-row:last-child { border-bottom: none; }
+    .shopping-cocktail-row:hover { background: rgba(200,167,106,0.04); }
+    .shopping-cocktail-row input[type="checkbox"] {
+      appearance: none;
+      width: 18px; height: 18px; min-width: 18px;
+      border: 1px solid var(--border-strong);
+      border-radius: 2px;
+      background: var(--bg);
+      cursor: pointer;
+      position: relative;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .shopping-cocktail-row input[type="checkbox"]:checked {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+    .shopping-cocktail-row input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px; top: 2px;
+      width: 6px; height: 9px;
+      border: 2px solid var(--bg);
+      border-left: none; border-top: none;
+      transform: rotate(45deg);
+    }
+    .shopping-cocktail-label {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--cream);
+      cursor: pointer;
+      flex: 1;
+    }
+    .missing-count {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: #c85c5c;
+    }
+
+    .shopping-list {
+      margin-top: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .shopping-list-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+    }
+    .shopping-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.7rem 1.25rem;
+      border-bottom: 1px solid rgba(200,167,106,0.07);
+    }
+    .shopping-item:last-child { border-bottom: none; }
+    .shopping-item-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--cream);
+    }
+    .shopping-item-cocktails {
+      font-size: 0.7rem;
+      color: var(--cream-dim);
+      letter-spacing: 0.05em;
+    }
+    .shopping-empty {
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      opacity: 0.5;
+    }
+    .all-available {
+      padding: 3rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      opacity: 0.7;
+    }
+  </style>
 </head>
 <body>
 
@@ -39,27 +201,53 @@
   <!-- Main backoffice (hidden until unlocked) -->
   <div id="bo-main" style="display:none;">
     <div class="backoffice-wrapper">
+
       <div class="bo-header">
         <div class="bo-header-text">
-          <h2 data-i18n="bo_ingredients_title">Available Ingredients</h2>
-          <p data-i18n="bo_ingredients_desc">Tick the ingredients you currently have in stock.</p>
+          <h2 data-i18n="bo_title">Backoffice</h2>
         </div>
         <button class="btn-ghost" id="logout-btn" data-i18n="bo_logout">Lock</button>
       </div>
 
-      <div class="bo-controls">
-        <button class="btn-ghost" id="select-all-btn" data-i18n="bo_select_all">Select all</button>
-        <button class="btn-ghost" id="deselect-all-btn" data-i18n="bo_deselect_all">Deselect all</button>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="ingredients" data-i18n="bo_tab_ingredients">Ingredients</button>
+        <button class="tab-btn" data-tab="missing" data-i18n="bo_tab_missing">Missing cocktails</button>
+        <button class="tab-btn" data-tab="shopping" data-i18n="bo_tab_shopping">Shopping list</button>
       </div>
 
-      <div class="ingredients-panel" id="ingredients-panel">
-        <div class="loading" id="bo-loading"></div>
+      <!-- Tab 1: Ingredients -->
+      <div class="tab-panel active" id="tab-ingredients">
+        <p class="section-label" style="margin-bottom:1rem;" data-i18n="bo_ingredients_desc_short">
+          Tick the ingredients you currently have in stock.
+        </p>
+        <div class="bo-controls">
+          <button class="btn-ghost" id="select-all-btn" data-i18n="bo_select_all">Select all</button>
+          <button class="btn-ghost" id="deselect-all-btn" data-i18n="bo_deselect_all">Deselect all</button>
+        </div>
+        <br/>
+        <div class="ingredients-panel" id="ingredients-panel">
+          <div class="loading" id="bo-loading"></div>
+        </div>
+        <div class="bo-actions">
+          <button class="btn-primary" id="save-btn" data-i18n="bo_save">Save Changes</button>
+          <span class="save-status" id="save-status" data-i18n="bo_saved">Saved!</span>
+        </div>
       </div>
 
-      <div class="bo-actions">
-        <button class="btn-primary" id="save-btn" data-i18n="bo_save">Save Changes</button>
-        <span class="save-status" id="save-status" data-i18n="bo_saved">Saved!</span>
+      <!-- Tab 2: Missing cocktails -->
+      <div class="tab-panel" id="tab-missing">
+        <div id="missing-panel"></div>
       </div>
+
+      <!-- Tab 3: Shopping list -->
+      <div class="tab-panel" id="tab-shopping">
+        <p class="section-label" style="margin-bottom:1rem;" data-i18n="bo_shopping_desc">
+          Select the cocktails you want to prepare. Ingredients you already have are excluded.
+        </p>
+        <div class="ingredients-panel" id="shopping-cocktails-panel"></div>
+        <div id="shopping-list-panel"></div>
+      </div>
+
     </div>
   </div>
 
@@ -68,21 +256,18 @@
   <script>
     (function () {
       const BACKOFFICE_PASSWORD = "%%BO_PASSWORD_HASH%%";
-      const SESSION_KEY = "bo_unlocked";
+      const SESSION_KEY   = "bo_unlocked";
+      const PLANNED_KEY   = "planned_cocktails";
 
       applyTranslations();
       initLangToggle("lang-toggle");
 
+      // Add missing i18n keys inline
       const lang = getLang();
 
-      // Check if already unlocked in this session
-      function isUnlocked() {
-        return sessionStorage.getItem(SESSION_KEY) === "1";
-      }
-      function unlock() {
-        sessionStorage.setItem(SESSION_KEY, "1");
-        showMain();
-      }
+      // ── Auth ──────────────────────────────────────────
+      function isUnlocked() { return sessionStorage.getItem(SESSION_KEY) === "1"; }
+      function unlock() { sessionStorage.setItem(SESSION_KEY, "1"); showMain(); }
       function lock() {
         sessionStorage.removeItem(SESSION_KEY);
         document.getElementById("gate-screen").style.display = "";
@@ -91,18 +276,22 @@
         document.getElementById("pw-error").classList.remove("visible");
       }
 
-      // Gate logic
-      const pwInput  = document.getElementById("pw-input");
-      const pwError  = document.getElementById("pw-error");
-      const unlockBtn = document.getElementById("unlock-btn");
-
-      unlockBtn.addEventListener("click", attempt);
+      const pwInput   = document.getElementById("pw-input");
+      const pwError   = document.getElementById("pw-error");
+      document.getElementById("unlock-btn").addEventListener("click", attempt);
       pwInput.addEventListener("keydown", e => { if (e.key === "Enter") attempt(); });
+      document.getElementById("logout-btn").addEventListener("click", lock);
 
       async function attempt() {
-        const val = pwInput.value;
-        const hash = await sha256(val);
-        if (hash === BACKOFFICE_PASSWORD) {
+        const hash = await sha256(pwInput.value);
+        // Try saving current state (or a no-op verify) to test the password
+        const res = await fetch("/.netlify/functions/set-availability", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-password-hash": hash },
+          body: JSON.stringify("__verify__")
+        });
+        if (res.ok) {
+          sessionStorage.setItem("bo_hash", hash); // store hash for saves later
           pwError.classList.remove("visible");
           unlock();
         } else {
@@ -113,26 +302,57 @@
       }
 
       async function sha256(message) {
-        const msgBuffer = new TextEncoder().encode(message);
-        const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+        const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(message));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
       }
-
-      document.getElementById("logout-btn").addEventListener("click", lock);
 
       if (isUnlocked()) showMain();
 
-      // ── Main panel ──────────────────────────────────
+      // ── Tabs ──────────────────────────────────────────
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+          document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+          if (btn.dataset.tab === "missing")   renderMissing();
+          if (btn.dataset.tab === "shopping")  renderShopping();
+        });
+      });
+
+      // ── Shared state ──────────────────────────────────
+      let _cocktails = null;
+      async function getCocktails() {
+        if (!_cocktails) _cocktails = await loadCocktails();
+        return _cocktails;
+      }
+
+      function getCurrentAvailableSet() {
+        const raw = getAvailableIngredients();
+        if (raw === null) return null;
+        return new Set(raw.map(s => s.toLowerCase()));
+      }
+
+      function getPlannedSet() {
+        try {
+          const raw = localStorage.getItem(PLANNED_KEY);
+          return raw ? new Set(JSON.parse(raw)) : new Set();
+        } catch { return new Set(); }
+      }
+      function savePlanned(set) {
+        localStorage.setItem(PLANNED_KEY, JSON.stringify([...set]));
+      }
+
+      // ── Tab 1: Ingredients ────────────────────────────
       async function showMain() {
         document.getElementById("gate-screen").style.display = "none";
         document.getElementById("bo-main").style.display = "";
 
         let cocktails;
-        try {
-          cocktails = await loadCocktails();
-        } catch {
-          document.getElementById("ingredients-panel").innerHTML = "<p style='padding:1rem;color:var(--cream-dim)'>Failed to load cocktails.json</p>";
+        try { cocktails = await getCocktails(); }
+        catch {
+          document.getElementById("ingredients-panel").innerHTML =
+            "<p style='padding:1rem;color:var(--cream-dim)'>Failed to load cocktails.json</p>";
           return;
         }
 
@@ -140,28 +360,24 @@
         const savedRaw      = getAvailableIngredients();
         const savedSet      = savedRaw !== null
           ? new Set(savedRaw.map(s => s.toLowerCase()))
-          : new Set(ingredientMap.keys()); // default: all checked
+          : new Set(ingredientMap.keys());
 
-        // Count how many cocktails use each ingredient
         const usageCount = new Map();
         ingredientMap.forEach((_, key) => usageCount.set(key, 0));
-        cocktails.forEach(c => {
-          c.ingredients.forEach(ing => {
-            const k = ing.name.en.toLowerCase();
-            usageCount.set(k, (usageCount.get(k) || 0) + 1);
-          });
-        });
+        cocktails.forEach(c => c.ingredients.forEach(ing => {
+          const k = ing.name.en.toLowerCase();
+          usageCount.set(k, (usageCount.get(k) || 0) + 1);
+        }));
 
-        // Build checkboxes
         const panel = document.getElementById("ingredients-panel");
         panel.innerHTML = "";
         [...ingredientMap.entries()].sort((a, b) => a[0].localeCompare(b[0])).forEach(([key, names]) => {
-          const label    = names[lang] || names.en;
-          const count    = usageCount.get(key) || 0;
-          const checked  = savedSet.has(key);
+          const label   = names[lang] || names.en;
+          const count   = usageCount.get(key) || 0;
+          const checked = savedSet.has(key);
           const row = document.createElement("label");
-          row.className  = "ingredient-check-row";
-          row.innerHTML  = `
+          row.className = "ingredient-check-row";
+          row.innerHTML = `
             <input type="checkbox" data-key="${key}" ${checked ? "checked" : ""}>
             <span class="ingredient-check-label">${label}</span>
             <span class="cocktail-count">${count} cocktail${count !== 1 ? "s" : ""}</span>
@@ -169,7 +385,6 @@
           panel.appendChild(row);
         });
 
-        // Select / deselect all
         document.getElementById("select-all-btn").addEventListener("click", () => {
           panel.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = true);
         });
@@ -177,18 +392,160 @@
           panel.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = false);
         });
 
-        // Save
         const saveBtn    = document.getElementById("save-btn");
         const saveStatus = document.getElementById("save-status");
-
-        saveBtn.addEventListener("click", () => {
+        saveBtn.addEventListener("click", async () => {
           const checked = [...panel.querySelectorAll("input[type=checkbox]:checked")].map(cb => cb.dataset.key);
-          setAvailableIngredients(new Set(checked));
-
+          const hash = sessionStorage.getItem("bo_hash");
+          saveBtn.disabled = true;
+          const ok = await setAvailableIngredients(new Set(checked), hash);
+          saveBtn.disabled = false;
+          if (ok) {
+            saveStatus.style.color = "var(--success)";
+            saveStatus.textContent = t("bo_saved");
+          } else {
+            saveStatus.style.color = "var(--danger)";
+            saveStatus.textContent = t("detail_error");
+          }
           saveStatus.classList.add("visible");
-          setTimeout(() => saveStatus.classList.remove("visible"), 2000);
+          setTimeout(() => saveStatus.classList.remove("visible"), 2500);
         });
       }
+
+      // ── Tab 2: Missing cocktails ───────────────────────
+      async function renderMissing() {
+        const panel = document.getElementById("missing-panel");
+        panel.innerHTML = "";
+
+        let cocktails;
+        try { cocktails = await getCocktails(); }
+        catch { panel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json</p>"; return; }
+
+        const availableSet = getCurrentAvailableSet();
+        const unavailable  = cocktails.filter(c => !cocktailIsAvailable(c, availableSet));
+
+        if (unavailable.length === 0) {
+          panel.innerHTML = `<p class="all-available">${t("bo_all_available")}</p>`;
+          return;
+        }
+
+        unavailable.forEach(c => {
+          const name = c.name[lang] || c.name.en;
+          const card = document.createElement("div");
+          card.className = "cocktail-missing-card";
+
+          const badges = c.ingredients.map(ing => {
+            const ingName = ing.name[lang] || ing.name.en;
+            const ingKey  = ing.name.en.toLowerCase();
+            const owned   = availableSet === null || availableSet.has(ingKey);
+            return `<span class="ing-badge ${owned ? "have" : "missing"}">${ingName}</span>`;
+          }).join("");
+
+          card.innerHTML = `
+            <div class="cocktail-missing-name">${name}</div>
+            <div class="missing-ingredients">${badges}</div>
+          `;
+          panel.appendChild(card);
+        });
+      }
+
+      // ── Tab 3: Shopping list ───────────────────────────
+      async function renderShopping() {
+        const cocktailsPanel  = document.getElementById("shopping-cocktails-panel");
+        const listPanel       = document.getElementById("shopping-list-panel");
+        cocktailsPanel.innerHTML = "";
+        listPanel.innerHTML = "";
+
+        let cocktails;
+        try { cocktails = await getCocktails(); }
+        catch { cocktailsPanel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json</p>"; return; }
+
+        const availableSet = getCurrentAvailableSet();
+        const unavailable  = cocktails.filter(c => !cocktailIsAvailable(c, availableSet));
+        const planned      = getPlannedSet();
+
+        if (unavailable.length === 0) {
+          cocktailsPanel.innerHTML = `<p class="all-available">${t("bo_all_available")}</p>`;
+          return;
+        }
+
+        // Cocktail checkboxes
+        unavailable.forEach(c => {
+          const name        = c.name[lang] || c.name.en;
+          const missingCount = c.ingredients.filter(ing => {
+            const k = ing.name.en.toLowerCase();
+            return availableSet !== null && !availableSet.has(k);
+          }).length;
+
+          const row = document.createElement("label");
+          row.className = "shopping-cocktail-row";
+          row.innerHTML = `
+            <input type="checkbox" data-id="${c.id}" ${planned.has(c.id) ? "checked" : ""}>
+            <span class="shopping-cocktail-label">${name}</span>
+            <span class="missing-count">${missingCount} missing</span>
+          `;
+          row.querySelector("input").addEventListener("change", () => {
+            const newPlanned = getPlannedSet();
+            if (row.querySelector("input").checked) newPlanned.add(c.id);
+            else newPlanned.delete(c.id);
+            savePlanned(newPlanned);
+            renderShoppingList(cocktails, availableSet);
+          });
+          cocktailsPanel.appendChild(row);
+        });
+
+        renderShoppingList(cocktails, availableSet);
+      }
+
+      function renderShoppingList(cocktails, availableSet) {
+        const listPanel = document.getElementById("shopping-list-panel");
+        listPanel.innerHTML = "";
+        const planned = getPlannedSet();
+
+        if (planned.size === 0) {
+          listPanel.innerHTML = `<div class="shopping-list"><p class="shopping-empty">${t("bo_shopping_empty")}</p></div>`;
+          return;
+        }
+
+        // Collect all missing ingredients across planned cocktails
+        // Map: ingKey → { name, cocktailNames[] }
+        const neededMap = new Map();
+        cocktails.filter(c => planned.has(c.id)).forEach(c => {
+          const cocktailName = c.name[lang] || c.name.en;
+          c.ingredients.forEach(ing => {
+            const key    = ing.name.en.toLowerCase();
+            const owned  = availableSet !== null && availableSet.has(key);
+            if (!owned) {
+              if (!neededMap.has(key)) {
+                neededMap.set(key, { name: ing.name[lang] || ing.name.en, cocktails: [] });
+              }
+              neededMap.get(key).cocktails.push(cocktailName);
+            }
+          });
+        });
+
+        if (neededMap.size === 0) {
+          listPanel.innerHTML = `<div class="shopping-list"><p class="shopping-empty" style="color:var(--success);opacity:1;">You already have everything needed!</p></div>`;
+          return;
+        }
+
+        const items = [...neededMap.entries()]
+          .sort((a, b) => a[0].localeCompare(b[0]))
+          .map(([, v]) => `
+            <div class="shopping-item">
+              <span class="shopping-item-name">${v.name}</span>
+              <span class="shopping-item-cocktails">${t("bo_needed_for")}: ${v.cocktails.join(", ")}</span>
+            </div>
+          `).join("");
+
+        listPanel.innerHTML = `
+          <div class="shopping-list">
+            <div class="shopping-list-header">${t("bo_tab_shopping")} — ${neededMap.size} item${neededMap.size !== 1 ? "s" : ""}</div>
+            ${items}
+          </div>
+        `;
+      }
+
     })();
   </script>
 </body>

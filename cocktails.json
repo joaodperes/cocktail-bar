@@ -21,7 +21,7 @@
       { "name": { "en": "Aperol", "pt": "Aperol" }, "quantity": "60 ml" },
       { "name": { "en": "Prosecco", "pt": "Prosecco" }, "quantity": "40 ml" },
       { "name": { "en": "Soda Water", "pt": "Água com Gás" }, "quantity": "30 ml" },
-      { "name": { "en": "Orange Slice", "pt": "Rodela de Laranja" }, "quantity": "1" }
+      { "name": { "en": "Orange", "pt": "Laranja" }, "quantity": "1" }
     ]
   },
   {
@@ -84,7 +84,7 @@
     "ice": true,
     "ingredients": [
       { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "60 ml" },
-      { "name": { "en": "Rose Syrup", "pt": "Xarope de Rosas" }, "quantity": "q.b." },
+      { "name": { "en": "Rose Water", "pt": "Água de Rosas" }, "quantity": "q.b." },
       { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "30 ml" }
     ]
   },
@@ -139,7 +139,7 @@
   },
   {
     "id": "londoner-lemonade",
-    "name": { "en": "Londoner Lemonade", "pt": "Lemonada de Londres" },
+    "name": { "en": "Londoner Lemonade", "pt": "Limonada Londrina" },
     "image": "images/londoner-lemonade.jpg",
     "glass": "rocks",
     "ice": true,
