@@ -44,7 +44,7 @@ function getAllUniqueIngredients(cocktails) {
 }
 
 async function loadCocktails() {
-  const res = await fetch("cocktails.json");
+  const res = await fetch("/cocktails.json");
   if (!res.ok) throw new Error("Failed to load cocktails.json");
   return res.json();
 }

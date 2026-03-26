@@ -395,8 +395,13 @@
         const saveBtn    = document.getElementById("save-btn");
         const saveStatus = document.getElementById("save-status");
         saveBtn.addEventListener("click", async () => {
-          const checked = [...panel.querySelectorAll("input[type=checkbox]:checked")].map(cb => cb.dataset.key);
           const hash = sessionStorage.getItem("bo_hash");
+          if (!hash) {
+            // Session expired — force re-login
+            lock();
+            return;
+          }
+          const checked = [...panel.querySelectorAll("input[type=checkbox]:checked")].map(cb => cb.dataset.key);
           saveBtn.disabled = true;
           const ok = await setAvailableIngredients(new Set(checked), hash);
           saveBtn.disabled = false;
