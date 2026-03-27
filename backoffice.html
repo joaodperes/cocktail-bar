@@ -357,11 +357,11 @@
         }
 
         const ingredientMap = getAllUniqueIngredients(cocktails);
-        const savedRaw      = getAvailableIngredients();
-        const savedSet      = savedRaw !== null
+        const savedRaw = await getAvailableIngredients();
+        const savedSet = (savedRaw !== null && savedRaw.length > 0)
           ? new Set(savedRaw.map(s => s.toLowerCase()))
           : new Set(ingredientMap.keys());
-
+          
         const usageCount = new Map();
         ingredientMap.forEach((_, key) => usageCount.set(key, 0));
         cocktails.forEach(c => c.ingredients.forEach(ing => {
@@ -426,7 +426,9 @@
         try { cocktails = await getCocktails(); }
         catch { panel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json</p>"; return; }
 
-        const availableSet = getCurrentAvailableSet();
+        const availableRaw = await getAvailableIngredients();
+        const availableSet = (availableRaw !== null && availableRaw.length > 0) ? new Set(availableRaw.map(s => s.toLowerCase())) : null;
+
         const unavailable  = cocktails.filter(c => !cocktailIsAvailable(c, availableSet));
 
         if (unavailable.length === 0) {
@@ -465,7 +467,8 @@
         try { cocktails = await getCocktails(); }
         catch { cocktailsPanel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json</p>"; return; }
 
-        const availableSet = getCurrentAvailableSet();
+        const availableRaw = await getAvailableIngredients();
+        const availableSet = (availableRaw !== null && availableRaw.length > 0) ? new Set(availableRaw.map(s => s.toLowerCase())) : null;
         const unavailable  = cocktails.filter(c => !cocktailIsAvailable(c, availableSet));
         const planned      = getPlannedSet();
 
