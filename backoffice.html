@@ -255,9 +255,10 @@
   <script src="js/utils.js"></script>
   <script>
     (function () {
-      const SESSION_KEY   = "bo_unlocked";
-      const PLANNED_KEY   = "planned_cocktails";
+      const SESSION_KEY = "bo_unlocked";
+      const PLANNED_KEY = "planned_cocktails";
 
+      let _cocktails = null;
       applyTranslations();
       initLangToggle("lang-toggle");
 
@@ -319,7 +320,6 @@
       });
 
       // ── Shared state ──────────────────────────────────
-      let _cocktails = null;
       async function getCocktails() {
         if (!_cocktails) _cocktails = await loadCocktails();
         return _cocktails;
