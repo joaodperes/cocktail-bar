@@ -13,15 +13,19 @@ async function getAvailableIngredients() {
 }
 
 async function setAvailableIngredients(set, passwordHash) {
-  const res = await fetch("/.netlify/functions/set-availability", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-password-hash": passwordHash
-    },
-    body: JSON.stringify([...set])
-  });
-  return res.ok;
+  try {
+    const res = await fetch("/.netlify/functions/set-availability", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-password-hash": passwordHash
+      },
+      body: JSON.stringify([...set])
+    });
+    return res.status;
+  } catch {
+    return 500;
+  }
 }
 
 function cocktailIsAvailable(cocktail, availableSet) {

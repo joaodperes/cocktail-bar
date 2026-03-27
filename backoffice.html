@@ -255,14 +255,12 @@
   <script src="js/utils.js"></script>
   <script>
     (function () {
-      const BACKOFFICE_PASSWORD = "%%BO_PASSWORD_HASH%%";
       const SESSION_KEY   = "bo_unlocked";
       const PLANNED_KEY   = "planned_cocktails";
 
       applyTranslations();
       initLangToggle("lang-toggle");
 
-      // Add missing i18n keys inline
       const lang = getLang();
 
       // ── Auth ──────────────────────────────────────────
@@ -306,7 +304,7 @@
         return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
       }
 
-      if (isUnlocked()) showMain();
+      if (isUnlocked()) showMain().catch(err => console.error("showMain failed:", err));
 
       // ── Tabs ──────────────────────────────────────────
       document.querySelectorAll(".tab-btn").forEach(btn => {
@@ -327,11 +325,6 @@
         return _cocktails;
       }
 
-      function getCurrentAvailableSet() {
-        const raw = getAvailableIngredients();
-        if (raw === null) return null;
-        return new Set(raw.map(s => s.toLowerCase()));
-      }
 
       function getPlannedSet() {
         try {
@@ -348,20 +341,30 @@
         document.getElementById("gate-screen").style.display = "none";
         document.getElementById("bo-main").style.display = "";
 
+        const panel = document.getElementById("ingredients-panel");
+
         let cocktails;
-        try { cocktails = await getCocktails(); }
-        catch {
-          document.getElementById("ingredients-panel").innerHTML =
-            "<p style='padding:1rem;color:var(--cream-dim)'>Failed to load cocktails.json</p>";
+        try {
+          cocktails = await getCocktails();
+        } catch (err) {
+          console.error("loadCocktails failed:", err);
+          panel.innerHTML = "<p style='padding:1rem;color:var(--danger)'>Could not load cocktails.json. Check the browser console for details.</p>";
           return;
         }
 
+        let savedRaw;
+        try {
+          savedRaw = await getAvailableIngredients();
+        } catch (err) {
+          console.error("getAvailableIngredients failed:", err);
+          savedRaw = null;
+        }
+
         const ingredientMap = getAllUniqueIngredients(cocktails);
-        const savedRaw = await getAvailableIngredients();
         const savedSet = (savedRaw !== null && savedRaw.length > 0)
           ? new Set(savedRaw.map(s => s.toLowerCase()))
           : new Set(ingredientMap.keys());
-          
+
         const usageCount = new Map();
         ingredientMap.forEach((_, key) => usageCount.set(key, 0));
         cocktails.forEach(c => c.ingredients.forEach(ing => {
@@ -369,7 +372,6 @@
           usageCount.set(k, (usageCount.get(k) || 0) + 1);
         }));
 
-        const panel = document.getElementById("ingredients-panel");
         panel.innerHTML = "";
         [...ingredientMap.entries()].sort((a, b) => a[0].localeCompare(b[0])).forEach(([key, names]) => {
           const label   = names[lang] || names.en;
@@ -397,20 +399,23 @@
         saveBtn.addEventListener("click", async () => {
           const hash = sessionStorage.getItem("bo_hash");
           if (!hash) {
-            // Session expired — force re-login
             lock();
             return;
           }
           const checked = [...panel.querySelectorAll("input[type=checkbox]:checked")].map(cb => cb.dataset.key);
           saveBtn.disabled = true;
-          const ok = await setAvailableIngredients(new Set(checked), hash);
+          const status = await setAvailableIngredients(new Set(checked), hash);
           saveBtn.disabled = false;
-          if (ok) {
+          if (status === 200) {
             saveStatus.style.color = "var(--success)";
             saveStatus.textContent = t("bo_saved");
+          } else if (status === 401) {
+            // Hash mismatch — session invalid, force re-login
+            lock();
+            return;
           } else {
             saveStatus.style.color = "var(--danger)";
-            saveStatus.textContent = t("detail_error");
+            saveStatus.textContent = `${t("detail_error")} (HTTP ${status})`;
           }
           saveStatus.classList.add("visible");
           setTimeout(() => saveStatus.classList.remove("visible"), 2500);
