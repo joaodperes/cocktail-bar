@@ -1,30 +1,29 @@
-const { getStore } = require("@netlify/blobs");
+import { getStore } from "@netlify/blobs";
 
-exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method not allowed" };
+export default async (req) => {
+  if (req.method !== "POST") {
+    return new Response("Method not allowed", { status: 405 });
   }
 
-  const hash = event.headers["x-password-hash"];
+  const hash = req.headers.get("x-password-hash");
   if (!hash || hash !== process.env.BO_PASSWORD_HASH) {
-    return { statusCode: 401, body: "Unauthorized" };
+    return new Response("Unauthorized", { status: 401 });
   }
 
   try {
-    const body = JSON.parse(event.body);
+    const body = await req.json();
 
-    // "__verify__" is sent only to test the password — don't overwrite data
     if (body === "__verify__") {
-      return { statusCode: 200, body: "OK" };
+      return new Response("OK", { status: 200 });
     }
 
     const store = getStore("bar-config");
-    // Store as a JSON string; get-availability reads it back with { type: "json" }
     await store.setJSON("availability", body);
-    return { statusCode: 200, body: "OK" };
+    return new Response("OK", { status: 200 });
   } catch (err) {
-    // Log the real error to Netlify function logs for debugging
     console.error("set-availability error:", err);
-    return { statusCode: 500, body: err.message || "Error saving" };
+    return new Response(err.message || "Error saving", { status: 500 });
   }
 };
+
+export const config = { path: "/.netlify/functions/set-availability" };

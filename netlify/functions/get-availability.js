@@ -1,15 +1,14 @@
-const { getStore } = require("@netlify/blobs");
+import { getStore } from "@netlify/blobs";
 
-exports.handler = async () => {
+export default async () => {
   try {
     const store = getStore("bar-config");
     const data = await store.get("availability", { type: "json" });
-    return {
-      statusCode: 200,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data ?? null)
-    };
-  } catch {
-    return { statusCode: 200, body: "null" };
+    return Response.json(data ?? null);
+  } catch (err) {
+    console.error("get-availability error:", err);
+    return Response.json(null);
   }
 };
+
+export const config = { path: "/.netlify/functions/get-availability" };
