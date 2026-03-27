@@ -19,10 +19,12 @@ exports.handler = async (event) => {
     }
 
     const store = getStore("bar-config");
-    // event.body is already a valid JSON string — store it directly
-    await store.set("availability", event.body);
+    // Store as a JSON string; get-availability reads it back with { type: "json" }
+    await store.setJSON("availability", body);
     return { statusCode: 200, body: "OK" };
-  } catch {
-    return { statusCode: 500, body: "Error saving" };
+  } catch (err) {
+    // Log the real error to Netlify function logs for debugging
+    console.error("set-availability error:", err);
+    return { statusCode: 500, body: err.message || "Error saving" };
   }
 };
