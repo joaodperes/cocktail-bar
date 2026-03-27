@@ -1,5 +1,5 @@
 // build.js
-const fs = require("fs");
+import fs from "fs";
 
 fs.mkdirSync("dist", { recursive: true });
 
