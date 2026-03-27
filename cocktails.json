@@ -85,7 +85,8 @@
     "ingredients": [
       { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "60 ml" },
       { "name": { "en": "Rose Water", "pt": "Água de Rosas" }, "quantity": "q.b." },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "30 ml" }
+      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "30 ml" },
+      { "name": { "en": "Strawberry", "pt": "Morango" }, "quantity": "1" }
     ]
   },
   {
