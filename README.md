@@ -2,13 +2,13 @@
 
 A small, static cocktail-request site with a password-protected backoffice and server-side availability storage (Netlify Functions).
 
-Features
+## Features
 - Guest-facing gallery + per-cocktail request form
 - Backoffice to mark which ingredients you have in stock
 - Server-side persistence for availability via Netlify Functions and Netlify Blobs
 - Multi-language support (EN / PT)
 
-Quickstart
+## Quickstart
 
 - Clone the repo and open the site locally:
 
@@ -23,7 +23,7 @@ Quickstart
 
   `netlify dev` will run the functions locally and let the backoffice talk to them.
 
-Project structure
+## Project structure
 
 ```
 cocktail-bar/
@@ -40,18 +40,18 @@ cocktail-bar/
 └── netlify.toml        ← Netlify config
 ```
 
-Cocktail data
+### Cocktail data
 
 Edit `cocktails.json` to manage cocktails. Each entry contains `id`, `name` (per-language), `image`, `glass`, `ice`, and `ingredients` (with `name` objects). See the existing file for examples.
 
-Backoffice and availability (new)
+### Backoffice and availability
 
 Recent updates move availability storage from browser `localStorage` to a shared server-side store using Netlify Blobs and two Netlify Functions:
 
 - `/.netlify/functions/get-availability` — GET current availability (returns `null` or an array of ingredient keys)
 - `/.netlify/functions/set-availability` — POST to update availability (expects JSON array)
 
-Authentication
+### Authentication
 
 The backoffice sends a SHA-256 hex hash of your password in the `x-password-hash` header when saving or verifying. The functions compare that header against the environment variable `BO_PASSWORD_HASH`.
 
@@ -69,7 +69,7 @@ Notes:
 - When deployed, availability is shared across devices (the backoffice saves to Netlify Blobs).
 - When the functions are unreachable (e.g., running a plain `index.html` file without `netlify dev`), the backoffice treats availability as unset and shows all cocktails.
 
-Build & deploy
+### Build & deploy
 
 The repo includes a simple `build.js` that copies files into `dist/` and injects environment tokens (for example `WEB3FORMS_KEY`).
 
@@ -88,22 +88,23 @@ node build.js
 # then serve the `dist/` directory (or deploy `dist/` to Netlify)
 ```
 
-Testing forms and local dev
+### Testing forms and local dev
 
 - Netlify Forms works when the site is deployed to Netlify. For local testing, use `netlify dev`.
 - To test the backoffice against the live functions from a local machine, ensure `BO_PASSWORD_HASH` in Netlify equals the hash produced locally from your password.
 
-Security notes
+### Security notes
 
 - `BO_PASSWORD_HASH` is compared server-side — avoid shipping raw passwords in client files.
 - The backoffice still keeps its unlocked session in `sessionStorage` when you enter the password; logging out clears it.
 - The functions require Netlify environment variables and will return `401` if `x-password-hash` does not match.
 
-Contributing
+#### Contributing
 
 - Update `cocktails.json` and add images in `images/`.
 - If adding features to functions, add any required packages to `package.json` so Netlify installs them.
 
-Contact / License
+## Contact / License
 
-This project is a small party tool—use and modify as you like. Open an issue or PR with improvements.
+If you use or adapt this project, please credit The Bar and link to this repository. Please refer to [LICENSE](LICENSE) for further detail.
+Feel free to open an issue or PR with improvements.

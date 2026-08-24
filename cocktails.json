@@ -48,7 +48,7 @@
       { "name": { "en": "Lime Juice", "pt": "Sumo de Lima" }, "quantity": "30 ml" },
       { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "20 ml" },
       { "name": { "en": "Fresh Mint", "pt": "Hortelã Fresca" }, "quantity": "8 leaves" },
-      { "name": { "en": "Soda Water", "pt": "Água com Gás" }, "quantity": "Top up" }
+      { "name": { "en": "Soda Water", "pt": "Água com Gás" }, "quantity": "q.b." }
     ]
   },
   {
@@ -80,7 +80,7 @@
     "id": "rose-gin",
     "name": { "en": "Rose Gin", "pt": "Gin de rosas" },
     "image": "images/rose-gin.jpg",
-    "glass": "rocks",
+    "glass": "gin",
     "ice": true,
     "ingredients": [
       { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "60 ml" },
@@ -165,7 +165,7 @@
     "id": "moscow-mule",
     "name": { "en": "Moscow Mule", "pt": "Moscow Mule" },
     "image": "images/moscow-mule.jpg",
-    "glass": "highball",
+    "glass": "mug",
     "ice": true,
     "ingredients": [
       { "name": { "en": "Vodka", "pt": "Vodka" }, "quantity": "30 ml" },
@@ -177,7 +177,7 @@
     "id": "cider-mule",
     "name": { "en": "Cider Mule", "pt": "Cider Mule" },
     "image": "images/cider-mule.jpg",
-    "glass": "highball",
+    "glass": "mug",
     "ice": true,
     "ingredients": [
       { "name": { "en": "Vodka", "pt": "Vodka" }, "quantity": "30 ml" },
@@ -233,6 +233,110 @@
       { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "50 ml" },
       { "name": { "en": "Basil", "pt": "Manjericão" }, "quantity": "2" },
       { "name": { "en": "Soda Water", "pt": "Água com Gás" }, "quantity": "q.b." }
+    ]
+  },
+  {
+    "id": "juniper-gin",
+    "name": {"en":"Blackberry and juniper gin", "pt":"Gin de amora e zimbro" },
+    "image": "images/juniper-gin.jpg",
+    "glass": "gin",
+    "ice": true,
+    "ingredients": [
+      {"name": {"en": "Gin", "pt": "Gin"}, "quantity": "50 ml"},
+      {"name": {"en": "Water", "pt": "Água"}, "quantity": "100 ml"},
+      {"name": {"en": "Sugar", "pt": "Açucar"}, "quantity": "50 g"},
+      {"name": {"en": "Juniper", "pt": "Zimbro"}, "quantity": "100 g"},
+      {"name": {"en": "Blackberries", "pt": "Amoras"}, "quantity": "200 g"},
+      {"name": {"en": "Soda Water", "pt": "Água com Gás"}, "quantity": "200 ml"}
+    ]
+  },
+  {
+    "id": "irish-coffee",
+    "name": { "en": "Irish Coffee", "pt": "Irish Coffee" },
+    "image": "images/irish-coffee.jpg",
+    "glass": "mug",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Whiskey", "pt": "Whiskey" }, "quantity": "45 ml" },
+      { "name": { "en": "Coffee", "pt": "Café" }, "quantity": "120 ml" },
+      { "name": { "en": "Sugar", "pt": "Açucar" }, "quantity": "1 bar spoon" },
+      { "name": { "en": "Cream", "pt": "Natas" }, "quantity": "30 ml" }
+    ]
+  },
+  {
+    "id": "bloody-mary",
+    "name": { "en": "Classic Bloody Mary", "pt": "Bloody Mary Clássico" },
+    "image": "images/bloody-mary.jpg",
+    "glass": "highball",
+    "ice": true,
+    "ingredients": [
+      { "name": { "en": "Vodka", "pt": "Vodka" }, "quantity": "45 ml" },
+      { "name": { "en": "Tomato Juice", "pt": "Sumo de Tomate" }, "quantity": "90 ml" },
+      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "15 ml" },
+      { "name": { "en": "Worcestershire Sauce", "pt": "Molho Inglês" }, "quantity": "q.b." },
+      { "name": { "en": "Tabasco", "pt": "Tabasco" }, "quantity": "q.b." }
+    ]
+  },
+  {
+    "id": "manhattan",
+    "name": { "en": "Manhattan", "pt": "Manhattan" },
+    "image": "images/manhattan.jpg",
+    "glass": "martini",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Whiskey", "pt": "Whiskey" }, "quantity": "60 ml" },
+      { "name": { "en": "Sweet Vermouth", "pt": "Vermute Doce" }, "quantity": "30 ml" },
+      { "name": { "en": "Angostura Bitters", "pt": "Angostura Bitters" }, "quantity": "q.b." }
+    ]
+  },
+  {
+    "id": "old-fashioned",
+    "name": { "en": "Classic Old Fashioned", "pt": "Old Fashioned Clássico" },
+    "image": "images/old-fashioned.jpg",
+    "glass": "rocks",
+    "ice": true,
+    "ingredients": [
+      { "name": { "en": "Whiskey", "pt": "Whiskey" }, "quantity": "60 ml" },
+      { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "10 ml" },
+      { "name": { "en": "Angostura Bitters", "pt": "Angostura Bitters" }, "quantity": "q.b." },
+      { "name": { "en": "Water", "pt": "Água" }, "quantity": "q.b." }
+    ]
+  },
+  {
+    "id": "daiquiri",
+    "name": { "en": "Classic Daiquiri", "pt": "Daiquiri Clássico" },
+    "image": "images/daiquiri.jpg",
+    "glass": "coupe",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "White Rum", "pt": "Rum Branco" }, "quantity": "60 ml" },
+      { "name": { "en": "Lime Juice", "pt": "Sumo de Lima" }, "quantity": "30 ml" },
+      { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "20 ml" }
+    ]
+  },
+  {
+    "id": "penicillin",
+    "name": { "en": "Penicillin", "pt": "Penicillin" },
+    "image": "images/penicillin.jpg",
+    "glass": "rocks",
+    "ice": true,
+    "ingredients": [
+      { "name": { "en": "Whiskey", "pt": "Whiskey" }, "quantity": "60 ml" },
+      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "20 ml" },
+      { "name": { "en": "Honey-Ginger Syrup", "pt": "Xarope de Mel e Gengibre" }, "quantity": "20 ml" }
+    ]
+  },
+  {
+    "id": "el-diablo",
+    "name": { "en": "El Diablo", "pt": "El Diablo" },
+    "image": "images/el-diablo.jpg",
+    "glass": "highball",
+    "ice": true,
+    "ingredients": [
+      { "name": { "en": "Tequila", "pt": "Tequila" }, "quantity": "45 ml" },
+      { "name": { "en": "Crème de Cassis", "pt": "Crème de Cassis" }, "quantity": "15 ml" },
+      { "name": { "en": "Lime Juice", "pt": "Sumo de Lima" }, "quantity": "15 ml" },
+      { "name": { "en": "Ginger Beer", "pt": "Cerveja de Gengibre" }, "quantity": "q.b." }
     ]
   }
 ]
