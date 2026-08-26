@@ -18,7 +18,7 @@ const TRANSLATIONS = {
     detail_ice_yes: "Served with ice",
     detail_ice_no: "Served straight up",
     detail_your_name: "Your name",
-    detail_name_placeholder: "What shall I call you?",
+    detail_name_placeholder: "Who's the drink for?",
     detail_submit: "Send Request",
     detail_back: "← Back to menu",
     detail_success_title: "Request sent!",
@@ -34,6 +34,8 @@ const TRANSLATIONS = {
     glass_wine: "Wine Glass",
     glass_hurricane: "Hurricane Glass",
     glass_collins: "Collins Glass",
+    glass_gin: "Gin Glass",
+    glass_mug: "Mug",
 
     // Backoffice
     bo_title: "Backoffice",
@@ -79,7 +81,7 @@ const TRANSLATIONS = {
     detail_ice_yes: "Servido com gelo",
     detail_ice_no: "Servido sem gelo",
     detail_your_name: "O seu nome",
-    detail_name_placeholder: "Como devo chamar-lhe?",
+    detail_name_placeholder: "A bebida é para?",
     detail_submit: "Enviar Pedido",
     detail_back: "← Voltar ao menu",
     detail_success_title: "Pedido enviado!",
@@ -95,6 +97,8 @@ const TRANSLATIONS = {
     glass_wine: "Copo de Vinho",
     glass_hurricane: "Copo Hurricane",
     glass_collins: "Copo Collins",
+    glass_gin: "Copo de Gin",
+    glass_mug: "Caneca",
 
     // Backoffice
     bo_title: "Backoffice",
