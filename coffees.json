@@ -1,0 +1,229 @@
+[
+  {
+    "id": "espresso",
+    "name": { "en": "Espresso", "pt": "Espresso" },
+    "image": "images/espresso.jpg",
+    "glass": "cup",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" }
+    ],
+    "preparation": {
+      "en": [
+        "Pull a single shot of espresso directly into a warmed cup.",
+        "Serve immediately."
+      ],
+      "pt": [
+        "Tire uma dose de espresso directamente para uma chávena quente.",
+        "Sirva de imediato."
+      ]
+    }
+  },
+  {
+    "id": "americano",
+    "name": { "en": "Americano", "pt": "Americano" },
+    "image": "images/americano.jpg",
+    "glass": "cup",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
+      { "name": { "en": "Hot Water", "pt": "Água Quente" }, "quantity": "120 ml" }
+    ],
+    "preparation": {
+      "en": [
+        "Pour the hot water into a cup.",
+        "Pull a shot of espresso on top.",
+        "Serve immediately."
+      ],
+      "pt": [
+        "Verta a água quente numa chávena.",
+        "Tire uma dose de espresso por cima.",
+        "Sirva de imediato."
+      ]
+    }
+  },
+  {
+    "id": "cappuccino",
+    "name": { "en": "Cappuccino", "pt": "Cappuccino" },
+    "image": "images/cappuccino.jpg",
+    "glass": "cup",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
+      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "60 ml" },
+      { "name": { "en": "Milk Foam", "pt": "Espuma de Leite" }, "quantity": "60 ml" }
+    ],
+    "preparation": {
+      "en": [
+        "Pull a shot of espresso into a cup.",
+        "Steam the milk until velvety and microfoamed.",
+        "Pour the steamed milk over the espresso, finishing with a thick layer of foam."
+      ],
+      "pt": [
+        "Tire uma dose de espresso para uma chávena.",
+        "Vaporize o leite até ficar aveludado e com microespuma.",
+        "Verta o leite vaporizado sobre o espresso, terminando com uma camada espessa de espuma."
+      ]
+    }
+  },
+  {
+    "id": "latte",
+    "name": { "en": "Caffè Latte", "pt": "Caffè Latte" },
+    "image": "images/latte.jpg",
+    "glass": "cup",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
+      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "150 ml" }
+    ],
+    "preparation": {
+      "en": [
+        "Pull a shot of espresso into a cup.",
+        "Steam the milk until smooth and silky.",
+        "Pour the steamed milk over the espresso, leaving a thin layer of foam on top."
+      ],
+      "pt": [
+        "Tire uma dose de espresso para uma chávena.",
+        "Vaporize o leite até ficar macio e sedoso.",
+        "Verta o leite vaporizado sobre o espresso, deixando uma fina camada de espuma no topo."
+      ]
+    }
+  },
+  {
+    "id": "flat-white",
+    "name": { "en": "Flat White", "pt": "Flat White" },
+    "image": "images/flat-white.jpg",
+    "glass": "cup",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "45 ml" },
+      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "90 ml" }
+    ],
+    "preparation": {
+      "en": [
+        "Pull a double shot of espresso into a cup.",
+        "Steam the milk to a fine, velvety microfoam.",
+        "Pour the milk over the espresso in a thin, even layer."
+      ],
+      "pt": [
+        "Tire uma dose dupla de espresso para uma chávena.",
+        "Vaporize o leite até obter uma microespuma fina e aveludada.",
+        "Verta o leite sobre o espresso numa camada fina e uniforme."
+      ]
+    }
+  },
+  {
+    "id": "macchiato",
+    "name": { "en": "Macchiato", "pt": "Macchiato" },
+    "image": "images/macchiato.jpg",
+    "glass": "cup",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
+      { "name": { "en": "Milk Foam", "pt": "Espuma de Leite" }, "quantity": "1 spoon" }
+    ],
+    "preparation": {
+      "en": [
+        "Pull a shot of espresso into a small cup.",
+        "Spoon a dollop of milk foam on top."
+      ],
+      "pt": [
+        "Tire uma dose de espresso para uma chávena pequena.",
+        "Coloque uma colherada de espuma de leite por cima."
+      ]
+    }
+  },
+  {
+    "id": "mocha",
+    "name": { "en": "Mocha", "pt": "Mocha" },
+    "image": "images/mocha.jpg",
+    "glass": "mug",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
+      { "name": { "en": "Chocolate Syrup", "pt": "Xarope de Chocolate" }, "quantity": "20 ml" },
+      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "120 ml" }
+    ],
+    "preparation": {
+      "en": [
+        "Add the chocolate syrup to a mug.",
+        "Pull a shot of espresso on top and stir to combine.",
+        "Steam the milk and pour it in, finishing with a little foam."
+      ],
+      "pt": [
+        "Adicione o xarope de chocolate a uma caneca.",
+        "Tire uma dose de espresso por cima e mexa para misturar.",
+        "Vaporize o leite e verta, terminando com um pouco de espuma."
+      ]
+    }
+  },
+  {
+    "id": "cortado",
+    "name": { "en": "Cortado", "pt": "Cortado" },
+    "image": "images/cortado.jpg",
+    "glass": "cup",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
+      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "30 ml" }
+    ],
+    "preparation": {
+      "en": [
+        "Pull a shot of espresso into a small cup.",
+        "Steam an equal amount of milk with minimal foam.",
+        "Pour the milk over the espresso to cut its acidity."
+      ],
+      "pt": [
+        "Tire uma dose de espresso para uma chávena pequena.",
+        "Vaporize uma quantidade igual de leite com pouca espuma.",
+        "Verta o leite sobre o espresso para cortar a acidez."
+      ]
+    }
+  },
+  {
+    "id": "affogato",
+    "name": { "en": "Affogato", "pt": "Affogato" },
+    "image": "images/affogato.jpg",
+    "glass": "coupe",
+    "ice": false,
+    "ingredients": [
+      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
+      { "name": { "en": "Vanilla Ice Cream", "pt": "Gelado de Baunilha" }, "quantity": "1 scoop" }
+    ],
+    "preparation": {
+      "en": [
+        "Place a scoop of vanilla ice cream in a coupe glass.",
+        "Pull a hot shot of espresso and pour it over the ice cream right before serving."
+      ],
+      "pt": [
+        "Coloque uma bola de gelado de baunilha numa taça coupe.",
+        "Tire uma dose de espresso quente e verta sobre o gelado mesmo antes de servir."
+      ]
+    }
+  },
+  {
+    "id": "iced-latte",
+    "name": { "en": "Iced Latte", "pt": "Latte Gelado" },
+    "image": "images/iced-latte.jpg",
+    "glass": "highball",
+    "ice": true,
+    "ingredients": [
+      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
+      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "150 ml" }
+    ],
+    "preparation": {
+      "en": [
+        "Fill a highball glass with ice.",
+        "Pour in the cold milk.",
+        "Pull a shot of espresso and pour it over the top.",
+        "Stir gently before serving."
+      ],
+      "pt": [
+        "Encha um copo highball com gelo.",
+        "Verta o leite frio.",
+        "Tire uma dose de espresso e verta por cima.",
+        "Mexa suavemente antes de servir."
+      ]
+    }
+  }
+]

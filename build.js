@@ -16,7 +16,7 @@ const replacements = {
   fs.writeFileSync(`dist/${file}`, content);
 });
 
-["css", "js", "images", "cocktails.json"].forEach(item => {
+["css", "js", "images", "cocktails.json", "coffees.json"].forEach(item => {
   fs.cpSync(item, `dist/${item}`, { recursive: true });
 });
 

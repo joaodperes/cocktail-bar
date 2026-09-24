@@ -11,9 +11,10 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-brand" data-i18n="nav_home">The Bar</a>
+    <a href="index.html" class="nav-brand" id="nav-brand" data-i18n="nav_home">The Bar</a>
     <div class="nav-actions">
       <a href="backoffice.html" class="nav-link" data-i18n="nav_backoffice">Staff</a>
+      <button class="lang-btn" id="menu-toggle"></button>
       <button class="lang-btn" id="lang-toggle"></button>
     </div>
   </nav>
@@ -30,32 +31,43 @@
     (function () {
       applyTranslations();
       initLangToggle("lang-toggle");
+      initMenuToggle("menu-toggle");
 
       const GLASS_ICONS = {
         rocks: "🥃", martini: "🍸", flute: "🥂",
         highball: "🥤", coupe: "🍷", wine: "🍷",
-        hurricane: "🍹", collins: "🧉"
+        hurricane: "🍹", collins: "🧉", gin: "🍷", mug: "🍺",
+        cup: "☕"
       };
 
       const params = new URLSearchParams(location.search);
       const id = params.get("id");
       const lang = getLang();
+      const menu = getMenuType();
+
+      // Keep the "back to menu" and logo links on the same menu the guest came from
+      const homeUrl = `index.html?menu=${menu}`;
+      document.getElementById("nav-brand").href = homeUrl;
 
       async function render() {
         const container = document.getElementById("detail-content");
 
-        if (!id) { location.href = "index.html"; return; }
+        if (!id) { location.href = homeUrl; return; }
 
-        let cocktails;
+        let drinks;
         try {
-          cocktails = await loadCocktails();
+          drinks = await loadMenu(menu);
         } catch {
-          container.innerHTML = `<a href="index.html" class="back-link" data-i18n="detail_back">${t("detail_back")}</a><p>${t("gallery_empty")}</p>`;
+          container.innerHTML = `<a href="${homeUrl}" class="back-link" data-i18n="detail_back">${t("detail_back")}</a><p>${t("gallery_empty")}</p>`;
           return;
         }
 
-        const c = cocktails.find(x => x.id === id);
-        if (!c) { location.href = "index.html"; return; }
+        const c = drinks.find(x => x.id === id);
+        if (!c) { location.href = homeUrl; return; }
+
+        const votesData = await getVotes();
+        let voteCount = votesData[c.id] || 0;
+        let voted = hasVoted(c.id);
 
         const name = c.name[lang] || c.name.en;
         document.title = `${name} — The Bar`;
@@ -78,7 +90,7 @@
         }).join("");
 
         container.innerHTML = `
-          <a href="index.html" class="back-link">${t("detail_back")}</a>
+          <a href="${homeUrl}" class="back-link">${t("detail_back")}</a>
 
           ${imgHtml}
 
@@ -86,6 +98,12 @@
           <div class="detail-badges">
             <span class="badge">${glassLabel}</span>
             <span class="badge ${c.ice ? "ice" : ""}">${c.ice ? t("detail_ice_yes") : t("detail_ice_no")}</span>
+          </div>
+
+          <div class="detail-section vote-section">
+            <button class="btn-ghost" id="upvote-btn">
+              ▲ <span id="vote-count">0</span> <span id="vote-label"></span>
+            </button>
           </div>
 
           <div class="detail-section">
@@ -117,6 +135,32 @@
             </div>
           </div>
         `;
+
+        function renderVoteUI() {
+          document.getElementById("vote-count").textContent = voteCount;
+          document.getElementById("vote-label").textContent =
+            t(voteCount === 1 ? "detail_vote_one" : "detail_vote_other");
+          const btn = document.getElementById("upvote-btn");
+          btn.disabled = voted;
+          btn.style.opacity = voted ? "0.5" : "1";
+          btn.title = voted ? t("detail_voted") : t("detail_upvote");
+        }
+        renderVoteUI();
+
+        document.getElementById("upvote-btn").addEventListener("click", async () => {
+          if (voted) return;
+          const btn = document.getElementById("upvote-btn");
+          btn.disabled = true;
+          const newCount = await upvoteCocktail(c.id);
+          if (newCount !== null) {
+            voteCount = newCount;
+            voted = true;
+            markVoted(c.id);
+            renderVoteUI();
+          } else {
+            btn.disabled = false;
+          }
+        });
 
         // Submit handler
         document.getElementById("submit-btn").addEventListener("click", async () => {

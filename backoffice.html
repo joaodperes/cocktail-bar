@@ -50,6 +50,7 @@
       color: var(--cream);
       margin-bottom: 0.75rem;
     }
+    .type-icon { opacity: 0.75; margin-right: 0.4rem; }
     .missing-ingredients { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .ing-badge {
       font-size: 0.65rem;
@@ -182,6 +183,7 @@
   <!-- Password gate -->
   <div id="gate-screen">
     <div class="password-gate">
+      <img src="images/osvaldo.jpg" alt="Osvaldo" class="gate-photo" />
       <h2 data-i18n="bo_title">Backoffice</h2>
       <p data-i18n="bo_subtitle">Manage ingredient availability</p>
       <label class="form-label" for="pw-input" data-i18n="bo_password_label">Password</label>
@@ -213,12 +215,13 @@
         <button class="tab-btn active" data-tab="ingredients" data-i18n="bo_tab_ingredients">Ingredients</button>
         <button class="tab-btn" data-tab="missing" data-i18n="bo_tab_missing">Missing cocktails</button>
         <button class="tab-btn" data-tab="shopping" data-i18n="bo_tab_shopping">Shopping list</button>
+        <button class="tab-btn" data-tab="recipes" data-i18n="bo_tab_recipes">Recipes</button>
       </div>
 
       <!-- Tab 1: Ingredients -->
       <div class="tab-panel active" id="tab-ingredients">
         <p class="section-label" style="margin-bottom:1rem;" data-i18n="bo_ingredients_desc_short">
-          Tick the ingredients you currently have in stock.
+          Tick the ingredients you currently have in stock. Shared across cocktails and coffee.
         </p>
         <div class="bo-controls">
           <button class="btn-ghost" id="select-all-btn" data-i18n="bo_select_all">Select all</button>
@@ -242,10 +245,15 @@
       <!-- Tab 3: Shopping list -->
       <div class="tab-panel" id="tab-shopping">
         <p class="section-label" style="margin-bottom:1rem;" data-i18n="bo_shopping_desc">
-          Select the cocktails you want to prepare. Ingredients you already have are excluded.
+          Select the drinks you want to prepare. Ingredients you already have are excluded.
         </p>
         <div class="ingredients-panel" id="shopping-cocktails-panel"></div>
         <div id="shopping-list-panel"></div>
+      </div>
+
+      <!-- Tab 4: Recipes -->
+      <div class="tab-panel" id="tab-recipes">
+        <div id="recipes-panel"></div>
       </div>
 
     </div>
@@ -257,8 +265,9 @@
     (function () {
       const SESSION_KEY = "bo_unlocked";
       const PLANNED_KEY = "planned_cocktails";
+      const TYPE_ICONS = { cocktail: "🍸", coffee: "☕" };
 
-      let _cocktails = null;
+      let _drinks = null;
       applyTranslations();
       initLangToggle("lang-toggle");
 
@@ -316,15 +325,18 @@
           document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
           if (btn.dataset.tab === "missing")   renderMissing();
           if (btn.dataset.tab === "shopping")  renderShopping();
+          if (btn.dataset.tab === "recipes")   renderRecipes();
         });
       });
 
       // ── Shared state ──────────────────────────────────
-      async function getCocktails() {
-        if (!_cocktails) _cocktails = await loadCocktails();
-        return _cocktails;
+      // One combined list of cocktails + coffee, each item tagged with
+      // _type ("cocktail" | "coffee"), since ingredient availability is a
+      // single shared pool across both menus.
+      async function getDrinks() {
+        if (!_drinks) _drinks = await loadAllDrinks();
+        return _drinks;
       }
-
 
       function getPlannedSet() {
         try {
@@ -343,12 +355,12 @@
 
         const panel = document.getElementById("ingredients-panel");
 
-        let cocktails;
+        let drinks;
         try {
-          cocktails = await getCocktails();
+          drinks = await getDrinks();
         } catch (err) {
-          console.error("loadCocktails failed:", err);
-          panel.innerHTML = "<p style='padding:1rem;color:var(--danger)'>Could not load cocktails.json. Check the browser console for details.</p>";
+          console.error("loadAllDrinks failed:", err);
+          panel.innerHTML = "<p style='padding:1rem;color:var(--danger)'>Could not load cocktails.json / coffees.json. Check the browser console for details.</p>";
           return;
         }
 
@@ -360,14 +372,14 @@
           savedRaw = null;
         }
 
-        const ingredientMap = getAllUniqueIngredients(cocktails);
+        const ingredientMap = getAllUniqueIngredients(drinks);
         const savedSet = (savedRaw !== null && savedRaw.length > 0)
           ? new Set(savedRaw.map(s => s.toLowerCase()))
           : new Set(ingredientMap.keys());
 
         const usageCount = new Map();
         ingredientMap.forEach((_, key) => usageCount.set(key, 0));
-        cocktails.forEach(c => c.ingredients.forEach(ing => {
+        drinks.forEach(c => c.ingredients.forEach(ing => {
           const k = ing.name.en.toLowerCase();
           usageCount.set(k, (usageCount.get(k) || 0) + 1);
         }));
@@ -382,7 +394,7 @@
           row.innerHTML = `
             <input type="checkbox" data-key="${key}" ${checked ? "checked" : ""}>
             <span class="ingredient-check-label">${label}</span>
-            <span class="cocktail-count">${count} cocktail${count !== 1 ? "s" : ""}</span>
+            <span class="cocktail-count">${count} drink${count !== 1 ? "s" : ""}</span>
           `;
           panel.appendChild(row);
         });
@@ -427,14 +439,14 @@
         const panel = document.getElementById("missing-panel");
         panel.innerHTML = "";
 
-        let cocktails;
-        try { cocktails = await getCocktails(); }
-        catch { panel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json</p>"; return; }
+        let drinks;
+        try { drinks = await getDrinks(); }
+        catch { panel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json / coffees.json</p>"; return; }
 
         const availableRaw = await getAvailableIngredients();
         const availableSet = (availableRaw !== null && availableRaw.length > 0) ? new Set(availableRaw.map(s => s.toLowerCase())) : null;
 
-        const unavailable  = cocktails.filter(c => !cocktailIsAvailable(c, availableSet));
+        const unavailable  = drinks.filter(c => !cocktailIsAvailable(c, availableSet));
 
         if (unavailable.length === 0) {
           panel.innerHTML = `<p class="all-available">${t("bo_all_available")}</p>`;
@@ -443,6 +455,7 @@
 
         unavailable.forEach(c => {
           const name = c.name[lang] || c.name.en;
+          const icon = TYPE_ICONS[c._type] || "";
           const card = document.createElement("div");
           card.className = "cocktail-missing-card";
 
@@ -454,7 +467,7 @@
           }).join("");
 
           card.innerHTML = `
-            <div class="cocktail-missing-name">${name}</div>
+            <div class="cocktail-missing-name"><span class="type-icon">${icon}</span>${name}</div>
             <div class="missing-ingredients">${badges}</div>
           `;
           panel.appendChild(card);
@@ -468,13 +481,13 @@
         cocktailsPanel.innerHTML = "";
         listPanel.innerHTML = "";
 
-        let cocktails;
-        try { cocktails = await getCocktails(); }
-        catch { cocktailsPanel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json</p>"; return; }
+        let drinks;
+        try { drinks = await getDrinks(); }
+        catch { cocktailsPanel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json / coffees.json</p>"; return; }
 
         const availableRaw = await getAvailableIngredients();
         const availableSet = (availableRaw !== null && availableRaw.length > 0) ? new Set(availableRaw.map(s => s.toLowerCase())) : null;
-        const unavailable  = cocktails.filter(c => !cocktailIsAvailable(c, availableSet));
+        const unavailable  = drinks.filter(c => !cocktailIsAvailable(c, availableSet));
         const planned      = getPlannedSet();
 
         if (unavailable.length === 0) {
@@ -482,9 +495,10 @@
           return;
         }
 
-        // Cocktail checkboxes
+        // Drink checkboxes
         unavailable.forEach(c => {
-          const name        = c.name[lang] || c.name.en;
+          const name         = c.name[lang] || c.name.en;
+          const icon         = TYPE_ICONS[c._type] || "";
           const missingCount = c.ingredients.filter(ing => {
             const k = ing.name.en.toLowerCase();
             return availableSet !== null && !availableSet.has(k);
@@ -494,7 +508,7 @@
           row.className = "shopping-cocktail-row";
           row.innerHTML = `
             <input type="checkbox" data-id="${c.id}" ${planned.has(c.id) ? "checked" : ""}>
-            <span class="shopping-cocktail-label">${name}</span>
+            <span class="shopping-cocktail-label"><span class="type-icon">${icon}</span>${name}</span>
             <span class="missing-count">${missingCount} missing</span>
           `;
           row.querySelector("input").addEventListener("change", () => {
@@ -502,15 +516,15 @@
             if (row.querySelector("input").checked) newPlanned.add(c.id);
             else newPlanned.delete(c.id);
             savePlanned(newPlanned);
-            renderShoppingList(cocktails, availableSet);
+            renderShoppingList(drinks, availableSet);
           });
           cocktailsPanel.appendChild(row);
         });
 
-        renderShoppingList(cocktails, availableSet);
+        renderShoppingList(drinks, availableSet);
       }
 
-      function renderShoppingList(cocktails, availableSet) {
+      function renderShoppingList(drinks, availableSet) {
         const listPanel = document.getElementById("shopping-list-panel");
         listPanel.innerHTML = "";
         const planned = getPlannedSet();
@@ -520,10 +534,10 @@
           return;
         }
 
-        // Collect all missing ingredients across planned cocktails
+        // Collect all missing ingredients across planned drinks
         // Map: ingKey → { name, cocktailNames[] }
         const neededMap = new Map();
-        cocktails.filter(c => planned.has(c.id)).forEach(c => {
+        drinks.filter(c => planned.has(c.id)).forEach(c => {
           const cocktailName = c.name[lang] || c.name.en;
           c.ingredients.forEach(ing => {
             const key    = ing.name.en.toLowerCase();
@@ -538,7 +552,7 @@
         });
 
         if (neededMap.size === 0) {
-          listPanel.innerHTML = `<div class="shopping-list"><p class="shopping-empty" style="color:var(--success);opacity:1;">You already have everything needed!</p></div>`;
+          listPanel.innerHTML = `<div class="shopping-list"><p class="shopping-empty" style="color:var(--success);opacity:1;">${t("bo_all_owned")}</p></div>`;
           return;
         }
 
@@ -557,6 +571,37 @@
             ${items}
           </div>
         `;
+      }
+
+      // ── Tab 4: Recipes ─────────────────────────────────
+      async function renderRecipes() {
+        const panel = document.getElementById("recipes-panel");
+        panel.innerHTML = "";
+
+        let drinks;
+        try { drinks = await getDrinks(); }
+        catch { panel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json / coffees.json</p>"; return; }
+
+        [...drinks]
+          .sort((a, b) => (a.name[lang] || a.name.en).localeCompare(b.name[lang] || b.name.en))
+          .forEach(c => {
+            const name  = c.name[lang] || c.name.en;
+            const icon  = TYPE_ICONS[c._type] || "";
+            const steps = (c.preparation && c.preparation[lang]) || (c.preparation && c.preparation.en) || [];
+
+            const card = document.createElement("div");
+            card.className = "cocktail-missing-card";
+
+            const stepsHtml = steps.length
+              ? `<ol class="recipe-steps">${steps.map(s => `<li>${s}</li>`).join("")}</ol>`
+              : `<p class="recipe-empty">${t("bo_recipe_none")}</p>`;
+
+            card.innerHTML = `
+              <div class="cocktail-missing-name"><span class="type-icon">${icon}</span>${name}</div>
+              ${stepsHtml}
+            `;
+            panel.appendChild(card);
+          });
       }
 
     })();

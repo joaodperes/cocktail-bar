@@ -15,13 +15,14 @@
     <a href="index.html" class="nav-brand" data-i18n="nav_home">The Bar</a>
     <div class="nav-actions">
       <a href="backoffice.html" class="nav-link" data-i18n="nav_backoffice">Staff</a>
+      <button class="lang-btn" id="menu-toggle"></button>
       <button class="lang-btn" id="lang-toggle"></button>
     </div>
   </nav>
 
   <header class="page-header">
-    <h1 data-i18n="gallery_title">Tonight's Menu</h1>
-    <p data-i18n="gallery_subtitle">Choose your poison.</p>
+    <h1 id="page-title" data-i18n="gallery_title">Tonight's Menu</h1>
+    <p id="page-subtitle" data-i18n="gallery_subtitle">Choose your poison.</p>
   </header>
 
   <main>
@@ -36,29 +37,38 @@
     (function () {
       applyTranslations();
       initLangToggle("lang-toggle");
+      initMenuToggle("menu-toggle");
 
       const GLASS_ICONS = {
         rocks: "🥃", martini: "🍸", flute: "🥂",
         highball: "🥤", coupe: "🍷", wine: "🍷",
-        hurricane: "🍹", collins: "🧉", gin:"🍷", mug:"🍺"
+        hurricane: "🍹", collins: "🧉", gin: "🍷", mug: "🍺",
+        cup: "☕"
       };
 
       async function render() {
         const lang = getLang();
+        const menu = getMenuType();
         const gallery = document.getElementById("gallery");
 
-        let cocktails;
+        // Header copy differs per menu
+        document.getElementById("page-title").textContent =
+          t(menu === "coffee" ? "gallery_title_coffee" : "gallery_title");
+        document.getElementById("page-subtitle").textContent =
+          t(menu === "coffee" ? "gallery_subtitle_coffee" : "gallery_subtitle");
+
+        let drinks;
         try {
-          cocktails = await loadCocktails();
+          drinks = await loadMenu(menu);
         } catch {
-          gallery.innerHTML = `<p class="gallery-empty" data-i18n="gallery_empty">${t("gallery_empty")}</p>`;
+          gallery.innerHTML = `<p class="gallery-empty">${t("gallery_empty")}</p>`;
           return;
         }
 
         const availableRaw = await getAvailableIngredients();
         const availableSet = (availableRaw !== null && availableRaw.length > 0) ? new Set(availableRaw.map(s => s.toLowerCase())) : null;
 
-        const visible = cocktails.filter(c => cocktailIsAvailable(c, availableSet));
+        const visible = drinks.filter(c => cocktailIsAvailable(c, availableSet));
 
         gallery.innerHTML = "";
 
@@ -67,6 +77,8 @@
           return;
         }
 
+        const requestLabel = t(menu === "coffee" ? "gallery_request_coffee" : "gallery_request");
+
         visible.forEach((c, i) => {
           const name = c.name[lang] || c.name.en;
           const glassKey = "glass_" + (c.glass || "rocks");
@@ -74,7 +86,7 @@
           const icon = GLASS_ICONS[c.glass] || "🍹";
 
           const card = document.createElement("a");
-          card.href = `cocktail.html?id=${encodeURIComponent(c.id)}`;
+          card.href = `cocktail.html?id=${encodeURIComponent(c.id)}&menu=${menu}`;
           card.className = "card";
           card.style.animationDelay = `${i * 60}ms`;
 
@@ -90,7 +102,7 @@
                 <span class="badge">${glassLabel}</span>
                 ${c.ice ? `<span class="badge ice">${lang === "pt" ? "Gelo" : "Ice"}</span>` : ""}
               </div>
-              <div class="card-cta" data-i18n="gallery_request">${t("gallery_request")}</div>
+              <div class="card-cta">${requestLabel}</div>
             </div>
           `;
           gallery.appendChild(card);

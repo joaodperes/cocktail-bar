@@ -6,11 +6,18 @@ const TRANSLATIONS = {
     nav_backoffice: "Staff",
     lang_toggle: "PT",
 
+    // Menu toggle (cocktails / coffee)
+    menu_toggle_to_coffee: "☕ Coffee",
+    menu_toggle_to_cocktails: "🍸 Cocktails",
+
     // Gallery
     gallery_title: "Tonight's Menu",
     gallery_subtitle: "Choose your poison.",
+    gallery_title_coffee: "Today's Brews",
+    gallery_subtitle_coffee: "Pick your fix.",
     gallery_empty: "Nothing available right now — check back soon.",
     gallery_request: "Request this drink",
+    gallery_request_coffee: "Request this coffee",
 
     // Detail page
     detail_ingredients: "Ingredients",
@@ -36,6 +43,7 @@ const TRANSLATIONS = {
     glass_collins: "Collins Glass",
     glass_gin: "Gin Glass",
     glass_mug: "Mug",
+    glass_cup: "Coffee Cup",
 
     // Backoffice
     bo_title: "Backoffice",
@@ -56,12 +64,22 @@ const TRANSLATIONS = {
     bo_tab_ingredients: "Ingredients",
     bo_tab_missing:     "Missing cocktails",
     bo_tab_shopping:    "Shopping list",
-    bo_ingredients_desc_short: "Tick the ingredients you currently have in stock.",
-    bo_shopping_desc:   "Select the cocktails you want to prepare. Ingredients you already have are excluded.",
-    bo_all_available:   "All cocktails are currently available.",
-    bo_shopping_empty:  "Select cocktails above to generate a shopping list.",
+    bo_ingredients_desc_short: "Tick the ingredients you currently have in stock. Shared across cocktails and coffee.",
+    bo_shopping_desc:   "Select the drinks you want to prepare. Ingredients you already have are excluded.",
+    bo_all_available:   "All drinks are currently available.",
+    bo_shopping_empty:  "Select drinks above to generate a shopping list.",
     bo_needed_for:      "needed for",
     bo_all_owned:       "You already have everything needed!",
+
+    // Voting
+    detail_upvote: "Upvote this drink",
+    detail_voted:  "Thanks for voting!",
+    detail_vote_one: "vote",
+    detail_vote_other: "votes",
+
+    // Instructions
+    bo_tab_recipes:     "Recipes",
+    bo_recipe_none:     "No preparation instructions yet.",
   },
   pt: {
     // Nav
@@ -69,11 +87,18 @@ const TRANSLATIONS = {
     nav_backoffice: "Staff",
     lang_toggle: "EN",
 
+    // Menu toggle (cocktails / coffee)
+    menu_toggle_to_coffee: "☕ Café",
+    menu_toggle_to_cocktails: "🍸 Cocktails",
+
     // Gallery
     gallery_title: "Menu de Hoje",
     gallery_subtitle: "O que é que se bebe aqui?",
+    gallery_title_coffee: "Cafés de Hoje",
+    gallery_subtitle_coffee: "Escolha o seu café.",
     gallery_empty: "Nada disponível de momento — volte mais tarde.",
     gallery_request: "Pedir este cocktail",
+    gallery_request_coffee: "Pedir este café",
 
     // Detail page
     detail_ingredients: "Ingredientes",
@@ -99,6 +124,7 @@ const TRANSLATIONS = {
     glass_collins: "Copo Collins",
     glass_gin: "Copo de Gin",
     glass_mug: "Caneca",
+    glass_cup: "Chávena de Café",
 
     // Backoffice
     bo_title: "Backoffice",
@@ -119,12 +145,22 @@ const TRANSLATIONS = {
     bo_tab_ingredients: "Ingredientes",
     bo_tab_missing:     "Cocktails em falta",
     bo_tab_shopping:    "Lista de compras",
-    bo_ingredients_desc_short: "Seleccione os ingredientes que tem em stock.",
-    bo_shopping_desc:   "Seleccione os cocktails que quer preparar. Ingredientes que já tem são excluídos.",
-    bo_all_available:   "Todos os cocktails estão disponíveis de momento.",
-    bo_shopping_empty:  "Seleccione cocktails acima para gerar a lista de compras.",
+    bo_ingredients_desc_short: "Seleccione os ingredientes que tem em stock. Partilhado entre cocktails e café.",
+    bo_shopping_desc:   "Seleccione as bebidas que quer preparar. Ingredientes que já tem são excluídos.",
+    bo_all_available:   "Todas as bebidas estão disponíveis de momento.",
+    bo_shopping_empty:  "Seleccione bebidas acima para gerar a lista de compras.",
     bo_needed_for:      "necessário para",
     bo_all_owned:       "Já tem tudo o que precisa!",
+
+    // Voting
+    detail_upvote: "Votar neste cocktail",
+    detail_voted:  "Obrigado pelo voto!",
+    detail_vote_one: "voto",
+    detail_vote_other: "votos",
+
+    // Instructions
+    bo_tab_recipes:     "Receitas",
+    bo_recipe_none:     "Ainda sem instruções de preparação.",
   }
 };
 

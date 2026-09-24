@@ -417,6 +417,15 @@ nav {
   display: none;
 }
 .password-error.visible { display: block; }
+.gate-photo {
+  width: clamp(64px, 20vw, 96px);
+  height: clamp(64px, 20vw, 96px);
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1.5rem;
+  border: 2px solid var(--gold);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
 
 .bo-header {
   display: flex; align-items: flex-start; justify-content: space-between;
@@ -551,4 +560,18 @@ nav {
   .detail-wrapper,
   .backoffice-wrapper { padding: 1rem 1rem 4rem; }
   .bo-header { flex-direction: column; }
+}
+
+.recipe-steps {
+  padding-left: 1.25rem;
+  color: var(--cream);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+.recipe-steps li { padding-left: 0.25rem; }
+.recipe-empty {
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+  opacity: 0.6;
+  font-style: italic;
 }

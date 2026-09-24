@@ -49,3 +49,8 @@
   for = "/cocktails.json"
   [headers.values]
     Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/coffees.json"
+  [headers.values]
+    Cache-Control = "no-cache"
