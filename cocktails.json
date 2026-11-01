@@ -1,14 +1,35 @@
 [
   {
     "id": "negroni",
-    "name": { "en": "Negroni", "pt": "Negroni" },
+    "name": {
+      "en": "Negroni",
+      "pt": "Negroni"
+    },
     "image": "images/negroni.jpg",
     "glass": "rocks",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "30 ml" },
-      { "name": { "en": "Sweet Vermouth", "pt": "Vermute Doce" }, "quantity": "30 ml" },
-      { "name": { "en": "Campari", "pt": "Campari" }, "quantity": "30 ml" }
+      {
+        "name": {
+          "en": "Gin",
+          "pt": "Gin"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Sweet Vermouth",
+          "pt": "Vermute Doce"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Campari",
+          "pt": "Campari"
+        },
+        "quantity": "30 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -29,44 +50,96 @@
   },
   {
     "id": "aperol-spritz",
-    "name": { "en": "Aperol Spritz", "pt": "Aperol Spritz" },
+    "name": {
+      "en": "Aperol Spritz",
+      "pt": "Aperol Spritz"
+    },
     "image": "images/aperol-spritz.jpg",
     "glass": "wine",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Aperol", "pt": "Aperol" }, "quantity": "60 ml" },
-      { "name": { "en": "Prosecco", "pt": "Prosecco" }, "quantity": "40 ml" },
-      { "name": { "en": "Soda Water", "pt": "Água com Gás" }, "quantity": "30 ml" },
-      { "name": { "en": "Orange", "pt": "Laranja" }, "quantity": "1" }
+      {
+        "name": {
+          "en": "Aperol",
+          "pt": "Aperol"
+        },
+        "quantity": "60 ml"
+      },
+      {
+        "name": {
+          "en": "Prosecco",
+          "pt": "Prosecco"
+        },
+        "quantity": "90 ml"
+      },
+      {
+        "name": {
+          "en": "Soda Water",
+          "pt": "Água com Gás"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Orange",
+          "pt": "Laranja"
+        },
+        "quantity": "1"
+      }
     ],
     "preparation": {
       "en": [
-        "Fill a wine glass with ice.",
-        "Add Aperol and Prosecco.",
-        "Top with soda water.",
-        "Stir gently.",
-        "Garnish with an orange slice."
+        "Fill a large wine glass with ice.",
+        "Add 60 ml Aperol and 90 ml Prosecco.",
+        "Top with 30 ml soda water and stir very gently.",
+        "Garnish with one orange slice."
       ],
       "pt": [
-        "Encha um copo de vinho com gelo.",
-        "Adicione o Aperol e o Prosecco.",
-        "Complete com água com gás.",
-        "Mexa suavemente.",
+        "Encha um copo de vinho grande com gelo.",
+        "Adicione 60 ml de Aperol e 90 ml de Prosecco.",
+        "Complete com 30 ml de água com gás e mexa muito suavemente.",
         "Decore com uma rodela de laranja."
       ]
     }
   },
   {
     "id": "espresso-martini",
-    "name": { "en": "Espresso Martini", "pt": "Espresso Martini" },
+    "name": {
+      "en": "Espresso Martini",
+      "pt": "Espresso Martini"
+    },
     "image": "images/espresso-martini.jpg",
     "glass": "martini",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Vodka", "pt": "Vodka" }, "quantity": "30 ml" },
-      { "name": { "en": "Coffee Liqueur", "pt": "Licor de Café" }, "quantity": "30 ml" },
-      { "name": { "en": "Bailey's", "pt": "Bailey's" }, "quantity": "30 ml" },
-      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" }
+      {
+        "name": {
+          "en": "Vodka",
+          "pt": "Vodka"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Coffee Liqueur",
+          "pt": "Licor de Café"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Bailey's",
+          "pt": "Bailey's"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "30 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -83,16 +156,49 @@
   },
   {
     "id": "mojito",
-    "name": { "en": "Mojito", "pt": "Mojito" },
+    "name": {
+      "en": "Mojito",
+      "pt": "Mojito"
+    },
     "image": "images/mojito.jpg",
     "glass": "highball",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "White Rum", "pt": "Rum Branco" }, "quantity": "50 ml" },
-      { "name": { "en": "Lime Juice", "pt": "Sumo de Lima" }, "quantity": "30 ml" },
-      { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "20 ml" },
-      { "name": { "en": "Fresh Mint", "pt": "Hortelã Fresca" }, "quantity": "8 leaves" },
-      { "name": { "en": "Soda Water", "pt": "Água com Gás" }, "quantity": "q.b." }
+      {
+        "name": {
+          "en": "White Rum",
+          "pt": "Rum Branco"
+        },
+        "quantity": "50 ml"
+      },
+      {
+        "name": {
+          "en": "Lime Juice",
+          "pt": "Sumo de Lima"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Simple Syrup",
+          "pt": "Xarope Simples"
+        },
+        "quantity": "20 ml"
+      },
+      {
+        "name": {
+          "en": "Fresh Mint",
+          "pt": "Hortelã Fresca"
+        },
+        "quantity": "8 leaves"
+      },
+      {
+        "name": {
+          "en": "Soda Water",
+          "pt": "Água com Gás"
+        },
+        "quantity": "q.b."
+      }
     ],
     "preparation": {
       "en": [
@@ -109,145 +215,297 @@
   },
   {
     "id": "french-75",
-    "name": { "en": "French 75", "pt": "Francês 75" },
+    "name": {
+      "en": "French 75",
+      "pt": "Francês 75"
+    },
     "image": "images/french-75.jpg",
     "glass": "flute",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "60 ml" },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "30 ml" },
-      { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "30 ml" },
-      { "name": { "en": "Champagne", "pt": "Champanhe" }, "quantity": "q.b." }
+      {
+        "name": {
+          "en": "Gin",
+          "pt": "Gin"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Lemon Juice",
+          "pt": "Sumo de Limão"
+        },
+        "quantity": "15 ml"
+      },
+      {
+        "name": {
+          "en": "Simple Syrup",
+          "pt": "Xarope Simples"
+        },
+        "quantity": "15 ml"
+      },
+      {
+        "name": {
+          "en": "Champagne",
+          "pt": "Champanhe"
+        },
+        "quantity": "60 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "Add gin, lemon juice, and simple syrup to a shaker with ice.",
-        "Shake well until chilled.",
-        "Strain into a flute glass.",
-        "Top with Champagne."
+        "Shake gin, lemon juice and simple syrup briefly with ice.",
+        "Strain into a chilled Champagne flute without ice.",
+        "Slowly top with 60 ml Champagne and serve immediately."
       ],
       "pt": [
-        "Adicione o gin, o sumo de limão e o xarope simples a um shaker com gelo.",
-        "Agite bem até arrefecer.",
-        "Coe para um copo flute.",
-        "Complete com champanhe."
+        "Agite brevemente o gin, o sumo de limão e o xarope simples com gelo.",
+        "Coe para uma flute de champanhe fria, sem gelo.",
+        "Complete lentamente com 60 ml de champanhe e sirva de imediato."
       ]
     }
   },
   {
     "id": "pornstar-martini",
-    "name": { "en": "Pornstar Martini", "pt": "Pornstar Martini" },
+    "name": {
+      "en": "Pornstar Martini",
+      "pt": "Pornstar Martini"
+    },
     "image": "images/pornstar-martini.jpg",
     "glass": "coupe",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Vodka", "pt": "Vodka" }, "quantity": "60 ml" },
-      { "name": { "en": "Passionfruit Liqueur", "pt": "Licor de Maracujá" }, "quantity": "120 ml" },
-      { "name": { "en": "Lime Juice", "pt": "Sumo de Lima" }, "quantity": "30 ml" }
+      {
+        "name": {
+          "en": "Vodka",
+          "pt": "Vodka"
+        },
+        "quantity": "45 ml"
+      },
+      {
+        "name": {
+          "en": "Passionfruit Liqueur",
+          "pt": "Licor de Maracujá"
+        },
+        "quantity": "20 ml"
+      },
+      {
+        "name": {
+          "en": "Lime Juice",
+          "pt": "Sumo de Lima"
+        },
+        "quantity": "15 ml"
+      },
+      {
+        "name": {
+          "en": "Passionfruit Purée",
+          "pt": "Puré de Maracujá"
+        },
+        "quantity": "40 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "Add vodka, passionfruit liqueur, and lime juice to a shaker with ice.",
-        "Shake vigorously.",
-        "Strain into a coupe glass."
+        "Add the vodka, passionfruit liqueur, lime juice and passionfruit purée to a shaker with ice.",
+        "Shake vigorously until very cold and slightly frothy.",
+        "Double-strain into a chilled coupe glass without ice."
       ],
       "pt": [
-        "Adicione a vodka, o licor de maracujá e o sumo de lima a um shaker com gelo.",
-        "Agite vigorosamente.",
-        "Coe para uma taça coupe."
+        "Coloque vodka, licor de maracujá, sumo de lima e puré de maracujá num shaker com gelo.",
+        "Agite vigorosamente até ficar bem frio e ligeiramente espumoso.",
+        "Coe duas vezes para um copo coupe frio, sem gelo."
       ]
     }
   },
   {
     "id": "rose-gin",
-    "name": { "en": "Rose Gin", "pt": "Gin de rosas" },
+    "name": {
+      "en": "Rose Gin",
+      "pt": "Gin de rosas"
+    },
     "image": "images/rose-gin.jpg",
     "glass": "gin",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "60 ml" },
-      { "name": { "en": "Rose Water", "pt": "Água de Rosas" }, "quantity": "q.b." },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "30 ml" },
-      { "name": { "en": "Strawberry", "pt": "Morango" }, "quantity": "1" }
+      {
+        "name": {
+          "en": "Gin",
+          "pt": "Gin"
+        },
+        "quantity": "60 ml"
+      },
+      {
+        "name": {
+          "en": "Rose Water",
+          "pt": "Água de Rosas"
+        },
+        "quantity": "2–3 drops"
+      },
+      {
+        "name": {
+          "en": "Lemon Juice",
+          "pt": "Sumo de Limão"
+        },
+        "quantity": "15 ml"
+      },
+      {
+        "name": {
+          "en": "Strawberry",
+          "pt": "Morango"
+        },
+        "quantity": "1"
+      },
+      {
+        "name": {
+          "en": "Tonic Water",
+          "pt": "Água Tónica"
+        },
+        "quantity": "150 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "Fill a gin glass with ice.",
-        "Add the gin, lemon juice, and rose water.",
-        "Stir gently.",
-        "Garnish with a strawberry."
+        "Fill a gin balloon glass with plenty of ice.",
+        "Add 60 ml gin, 15 ml lemon juice and 2–3 drops of rose water.",
+        "Slowly top with 150 ml tonic water and stir gently.",
+        "Garnish with one strawberry."
       ],
       "pt": [
-        "Encha um copo de gin com gelo.",
-        "Adicione o gin, o sumo de limão e a água de rosas.",
-        "Mexa suavemente.",
+        "Encha um copo de gin balão com bastante gelo.",
+        "Adicione 60 ml de gin, 15 ml de sumo de limão e 2–3 gotas de água de rosas.",
+        "Complete lentamente com 150 ml de água tónica e mexa suavemente.",
         "Decore com um morango."
       ]
     }
   },
   {
     "id": "gin-fizz",
-    "name": { "en": "Gin Fizz", "pt": "Gin Fizz" },
+    "name": {
+      "en": "Gin Fizz",
+      "pt": "Gin Fizz"
+    },
     "image": "images/gin-fizz.jpg",
     "glass": "highball",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "100 ml" },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "50 ml" },
-      { "name": { "en": "Sugar", "pt": "Açucar" }, "quantity": "q.b." },
-      { "name": { "en": "Soda Water", "pt": "Água com Gás" }, "quantity": "q.b." }
+      {
+        "name": {
+          "en": "Gin",
+          "pt": "Gin"
+        },
+        "quantity": "45 ml"
+      },
+      {
+        "name": {
+          "en": "Lemon Juice",
+          "pt": "Sumo de Limão"
+        },
+        "quantity": "25 ml"
+      },
+      {
+        "name": {
+          "en": "Simple Syrup",
+          "pt": "Xarope Simples"
+        },
+        "quantity": "15 ml"
+      },
+      {
+        "name": {
+          "en": "Soda Water",
+          "pt": "Água com Gás"
+        },
+        "quantity": "100 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "Add gin, lemon juice, and sugar to a shaker with ice.",
-        "Shake vigorously for 15 seconds.",
-        "Strain into a highball glass filled with ice.",
-        "Top with soda water."
+        "Add gin, lemon juice and simple syrup to a shaker with ice.",
+        "Shake firmly for about 15 seconds, then strain into an ice-filled highball glass.",
+        "Slowly top with 100 ml soda water and serve."
       ],
       "pt": [
-        "Adicione o gin, o sumo de limão e o açúcar a um shaker com gelo.",
-        "Agite vigorosamente durante 15 segundos.",
-        "Coe para um copo highball com gelo.",
-        "Complete com água com gás."
+        "Coloque gin, sumo de limão e xarope simples num shaker com gelo.",
+        "Agite durante cerca de 15 segundos e coe para um copo highball com gelo.",
+        "Complete lentamente com 100 ml de água com gás e sirva."
       ]
     }
   },
   {
     "id": "cuba-libre",
-    "name": { "en": "Cuba Libre", "pt": "Cuba Libre" },
+    "name": {
+      "en": "Cuba Libre",
+      "pt": "Cuba Libre"
+    },
     "image": "images/cuba-libre.jpg",
     "glass": "highball",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Rum", "pt": "Rum" }, "quantity": "100 ml" },
-      { "name": { "en": "Coke", "pt": "Coca-Cola" }, "quantity": "20 ml" },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "20 ml" }
+      {
+        "name": {
+          "en": "White Rum",
+          "pt": "Rum Branco"
+        },
+        "quantity": "50 ml"
+      },
+      {
+        "name": {
+          "en": "Coke",
+          "pt": "Coca-Cola"
+        },
+        "quantity": "120 ml"
+      },
+      {
+        "name": {
+          "en": "Lime Juice",
+          "pt": "Sumo de Lima"
+        },
+        "quantity": "10 ml"
+      }
     ],
     "preparation": {
       "en": [
         "Fill a highball glass with ice.",
-        "Pour in the rum and lemon juice.",
-        "Top with Coke.",
-        "Stir gently."
+        "Add 50 ml white rum and 10 ml freshly squeezed lime juice.",
+        "Top with 120 ml cola and stir gently."
       ],
       "pt": [
         "Encha um copo highball com gelo.",
-        "Verta o rum e o sumo de limão.",
-        "Complete com Coca-Cola.",
-        "Mexa suavemente."
+        "Adicione 50 ml de rum branco e 10 ml de sumo de lima espremido na hora.",
+        "Complete com 120 ml de Coca-Cola e mexa suavemente."
       ]
     }
   },
   {
     "id": "vesper-martini",
-    "name": { "en": "Vesper Martini", "pt": "Vesper Martini" },
+    "name": {
+      "en": "Vesper Martini",
+      "pt": "Vesper Martini"
+    },
     "image": "images/vesper-martini.jpg",
     "glass": "martini",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "60 ml" },
-      { "name": { "en": "Vodka", "pt": "Vodka" }, "quantity": "30 ml" },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "30 ml" }
+      {
+        "name": {
+          "en": "Gin",
+          "pt": "Gin"
+        },
+        "quantity": "60 ml"
+      },
+      {
+        "name": {
+          "en": "Vodka",
+          "pt": "Vodka"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Lemon Juice",
+          "pt": "Sumo de Limão"
+        },
+        "quantity": "30 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -264,37 +522,73 @@
   },
   {
     "id": "gimlet",
-    "name": { "en": "Gimlet", "pt": "Gimlet" },
+    "name": {
+      "en": "Gimlet",
+      "pt": "Gimlet"
+    },
     "image": "images/gimlet.jpg",
     "glass": "martini",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "100 ml" },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "100 ml" },
-      { "name": { "en": "Sugar", "pt": "Açucar" }, "quantity": "q.b." }
+      {
+        "name": {
+          "en": "Gin",
+          "pt": "Gin"
+        },
+        "quantity": "60 ml"
+      },
+      {
+        "name": {
+          "en": "Lemon Juice",
+          "pt": "Sumo de Limão"
+        },
+        "quantity": "25 ml"
+      },
+      {
+        "name": {
+          "en": "Simple Syrup",
+          "pt": "Xarope Simples"
+        },
+        "quantity": "15 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "Add gin, lemon juice, and sugar to a shaker with ice.",
-        "Shake well.",
-        "Strain into a martini glass."
+        "Shake gin, lemon juice and simple syrup vigorously with ice.",
+        "Double-strain into a chilled martini glass without ice.",
+        "Serve immediately."
       ],
       "pt": [
-        "Adicione o gin, o sumo de limão e o açúcar a um shaker com gelo.",
-        "Agite bem.",
-        "Coe para um copo de martini."
+        "Agite vigorosamente gin, sumo de limão e xarope simples com gelo.",
+        "Coe duas vezes para um copo de martini frio, sem gelo.",
+        "Sirva de imediato."
       ]
     }
   },
   {
     "id": "londoner-lemonade",
-    "name": { "en": "Londoner Lemonade", "pt": "Limonada Londrina" },
+    "name": {
+      "en": "Londoner Lemonade",
+      "pt": "Limonada Londrina"
+    },
     "image": "images/londoner-lemonade.jpg",
     "glass": "rocks",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Gin", "pt": "Gin" }, "quantity": "40 ml" },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "90 ml" }
+      {
+        "name": {
+          "en": "Gin",
+          "pt": "Gin"
+        },
+        "quantity": "40 ml"
+      },
+      {
+        "name": {
+          "en": "Lemon Juice",
+          "pt": "Sumo de Limão"
+        },
+        "quantity": "90 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -311,14 +605,35 @@
   },
   {
     "id": "white-russian",
-    "name": { "en": "White Russian", "pt": "White Russian" },
+    "name": {
+      "en": "White Russian",
+      "pt": "White Russian"
+    },
     "image": "images/white-russian.jpg",
     "glass": "rocks",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Vodka", "pt": "Vodka" }, "quantity": "60 ml" },
-      { "name": { "en": "Coffee Liqueur", "pt": "Licor de Café" }, "quantity": "30 ml" },
-      { "name": { "en": "Cream", "pt": "Natas" }, "quantity": "30 ml" }
+      {
+        "name": {
+          "en": "Vodka",
+          "pt": "Vodka"
+        },
+        "quantity": "60 ml"
+      },
+      {
+        "name": {
+          "en": "Coffee Liqueur",
+          "pt": "Licor de Café"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Cream",
+          "pt": "Natas"
+        },
+        "quantity": "30 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -337,66 +652,139 @@
   },
   {
     "id": "moscow-mule",
-    "name": { "en": "Moscow Mule", "pt": "Moscow Mule" },
+    "name": {
+      "en": "Moscow Mule",
+      "pt": "Moscow Mule"
+    },
     "image": "images/moscow-mule.jpg",
     "glass": "mug",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Vodka", "pt": "Vodka" }, "quantity": "30 ml" },
-      { "name": { "en": "Ginger Beer", "pt": "Cerveja de Gengibre" }, "quantity": "90 ml" },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "30 ml" }
+      {
+        "name": {
+          "en": "Vodka",
+          "pt": "Vodka"
+        },
+        "quantity": "45 ml"
+      },
+      {
+        "name": {
+          "en": "Ginger Beer",
+          "pt": "Cerveja de Gengibre"
+        },
+        "quantity": "150 ml"
+      },
+      {
+        "name": {
+          "en": "Lemon Juice",
+          "pt": "Sumo de Limão"
+        },
+        "quantity": "15 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "Fill a mug with ice.",
-        "Pour in the vodka and lemon juice.",
-        "Top with ginger beer.",
-        "Stir gently."
+        "Fill a copper mug or other large mug with ice.",
+        "Pour in 45 ml vodka and 15 ml lemon juice.",
+        "Top with 150 ml ginger beer, stir gently and serve."
       ],
       "pt": [
-        "Encha uma caneca com gelo.",
-        "Verta a vodka e o sumo de limão.",
-        "Complete com cerveja de gengibre.",
-        "Mexa suavemente."
+        "Encha uma caneca de cobre ou outra caneca grande com gelo.",
+        "Verta 45 ml de vodka e 15 ml de sumo de limão.",
+        "Complete com 150 ml de cerveja de gengibre, mexa suavemente e sirva."
       ]
     }
   },
   {
     "id": "cider-mule",
-    "name": { "en": "Cider Mule", "pt": "Cider Mule" },
+    "name": {
+      "en": "Cider Mule",
+      "pt": "Cider Mule"
+    },
     "image": "images/cider-mule.jpg",
     "glass": "mug",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Vodka", "pt": "Vodka" }, "quantity": "30 ml" },
-      { "name": { "en": "Cider", "pt": "Cidra" }, "quantity": "90 ml" },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "30 ml" },
-      { "name": { "en": "Sugar", "pt": "Açucar" }, "quantity": "q.b." },
-      { "name": { "en": "Cinnamon", "pt": "Canela" }, "quantity": "q.b." }
+      {
+        "name": {
+          "en": "Vodka",
+          "pt": "Vodka"
+        },
+        "quantity": "45 ml"
+      },
+      {
+        "name": {
+          "en": "Cider",
+          "pt": "Cidra"
+        },
+        "quantity": "150 ml"
+      },
+      {
+        "name": {
+          "en": "Lemon Juice",
+          "pt": "Sumo de Limão"
+        },
+        "quantity": "15 ml"
+      },
+      {
+        "name": {
+          "en": "Sugar",
+          "pt": "Açucar"
+        },
+        "quantity": "q.b."
+      },
+      {
+        "name": {
+          "en": "Cinnamon",
+          "pt": "Canela"
+        },
+        "quantity": "q.b."
+      }
     ],
     "preparation": {
       "en": [
-        "Fill a mug with ice.",
-        "Add vodka, lemon juice, sugar, and cinnamon.",
-        "Top with cider and stir gently."
+        "Fill a large mug with ice.",
+        "Add 45 ml vodka and 15 ml lemon juice; add a little sugar and cinnamon if desired.",
+        "Top with 150 ml chilled cider, stir gently and serve."
       ],
       "pt": [
-        "Encha uma caneca com gelo.",
-        "Adicione a vodka, o sumo de limão, o açúcar e a canela.",
-        "Complete com cidra e mexa suavemente."
+        "Encha uma caneca grande com gelo.",
+        "Adicione 45 ml de vodka e 15 ml de sumo de limão; acrescente um pouco de açúcar e canela, se desejar.",
+        "Complete com 150 ml de cidra fria, mexa suavemente e sirva."
       ]
     }
   },
   {
     "id": "spritz-hugo",
-    "name": { "en": "Spritz Hugo", "pt": "Spritz Hugo" },
+    "name": {
+      "en": "Spritz Hugo",
+      "pt": "Spritz Hugo"
+    },
     "image": "images/spritz-hugo.jpg",
     "glass": "wine",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Prosecco", "pt": "Prosecco" }, "quantity": "90 ml" },
-      { "name": { "en": "Elderflower Syrup", "pt": "Xarope de Sabugueiro" }, "quantity": "30 ml" },
-      { "name": { "en": "Soda Water", "pt": "Água com Gás" }, "quantity": "60 ml" }
+      {
+        "name": {
+          "en": "Prosecco",
+          "pt": "Prosecco"
+        },
+        "quantity": "90 ml"
+      },
+      {
+        "name": {
+          "en": "Elderflower Syrup",
+          "pt": "Xarope de Sabugueiro"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Soda Water",
+          "pt": "Água com Gás"
+        },
+        "quantity": "60 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -415,118 +803,247 @@
   },
   {
     "id": "bellini",
-    "name": { "en": "Bellini", "pt": "Bellini" },
+    "name": {
+      "en": "Bellini",
+      "pt": "Bellini"
+    },
     "image": "images/bellini.jpg",
     "glass": "flute",
-    "ice": true,
+    "ice": false,
     "ingredients": [
-      { "name": { "en": "Prosecco", "pt": "Prosecco" }, "quantity": "100 ml" },
-      { "name": { "en": "Peach Puree", "pt": "Puré de Pêssego" }, "quantity": "50 ml" }
+      {
+        "name": {
+          "en": "Prosecco",
+          "pt": "Prosecco"
+        },
+        "quantity": "100 ml"
+      },
+      {
+        "name": {
+          "en": "Peach Puree",
+          "pt": "Puré de Pêssego"
+        },
+        "quantity": "50 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "Pour the peach puree into a flute glass.",
-        "Gently top with Prosecco.",
-        "Stir very gently to combine."
+        "Chill the Prosecco and peach purée before preparing.",
+        "Pour 50 ml peach purée into a chilled Champagne flute without ice.",
+        "Gently top with 100 ml Prosecco and stir once, very lightly."
       ],
       "pt": [
-        "Verta o puré de pêssego para um copo flute.",
-        "Complete suavemente com Prosecco.",
-        "Mexa muito suavemente para misturar."
+        "Arrefeça bem o Prosecco e o puré de pêssego antes de preparar.",
+        "Verta 50 ml de puré de pêssego numa flute de champanhe fria, sem gelo.",
+        "Complete suavemente com 100 ml de Prosecco e mexa uma única vez, muito ligeiramente."
       ]
     }
   },
   {
     "id": "rossini",
-    "name": { "en": "Rossini", "pt": "Rossini" },
+    "name": {
+      "en": "Rossini",
+      "pt": "Rossini"
+    },
     "image": "images/rossini.jpg",
     "glass": "flute",
-    "ice": true,
+    "ice": false,
     "ingredients": [
-      { "name": { "en": "Prosecco", "pt": "Prosecco" }, "quantity": "100 ml" },
-      { "name": { "en": "Strawberry Puree", "pt": "Puré de Morango" }, "quantity": "50 ml" }
+      {
+        "name": {
+          "en": "Prosecco",
+          "pt": "Prosecco"
+        },
+        "quantity": "100 ml"
+      },
+      {
+        "name": {
+          "en": "Strawberry Puree",
+          "pt": "Puré de Morango"
+        },
+        "quantity": "50 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "Pour the strawberry puree into a flute glass.",
-        "Gently top with Prosecco.",
-        "Stir very gently to combine."
+        "Chill the Prosecco and strawberry purée before preparing.",
+        "Pour 50 ml strawberry purée into a chilled Champagne flute without ice.",
+        "Gently top with 100 ml Prosecco and stir once, very lightly."
       ],
       "pt": [
-        "Verta o puré de morango para um copo flute.",
-        "Complete suavemente com Prosecco.",
-        "Mexa muito suavemente para misturar."
+        "Arrefeça bem o Prosecco e o puré de morango antes de preparar.",
+        "Verta 50 ml de puré de morango numa flute de champanhe fria, sem gelo.",
+        "Complete suavemente com 100 ml de Prosecco e mexa uma única vez, muito ligeiramente."
       ]
     }
   },
   {
     "id": "sabai-sabai",
-    "name": { "en": "Sabai Sabai", "pt": "Sabai Sabai" },
+    "name": {
+      "en": "Sabai Sabai",
+      "pt": "Sabai Sabai"
+    },
     "image": "images/sabai-sabai.jpg",
     "glass": "rocks",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Spiced Rum", "pt": "Rum de especiarias" }, "quantity": "50 ml" },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "50 ml" },
-      { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "50 ml" },
-      { "name": { "en": "Basil", "pt": "Manjericão" }, "quantity": "2" },
-      { "name": { "en": "Soda Water", "pt": "Água com Gás" }, "quantity": "q.b." }
+      {
+        "name": {
+          "en": "Spiced Rum",
+          "pt": "Rum de especiarias"
+        },
+        "quantity": "50 ml"
+      },
+      {
+        "name": {
+          "en": "Lemon Juice",
+          "pt": "Sumo de Limão"
+        },
+        "quantity": "25 ml"
+      },
+      {
+        "name": {
+          "en": "Simple Syrup",
+          "pt": "Xarope Simples"
+        },
+        "quantity": "20 ml"
+      },
+      {
+        "name": {
+          "en": "Basil",
+          "pt": "Manjericão"
+        },
+        "quantity": "2"
+      },
+      {
+        "name": {
+          "en": "Soda Water",
+          "pt": "Água com Gás"
+        },
+        "quantity": "40 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "Muddle the basil leaves with lemon juice and simple syrup in a shaker.",
-        "Add spiced rum and ice, and shake well.",
-        "Strain into a rocks glass filled with ice.",
-        "Top with soda water."
+        "Lightly muddle two basil leaves with the lemon juice and simple syrup in a shaker.",
+        "Add 50 ml spiced rum and ice, then shake well.",
+        "Strain into an ice-filled rocks glass.",
+        "Top with 40 ml soda water and serve."
       ],
       "pt": [
-        "Esmague as folhas de manjericão com o sumo de limão e o xarope simples num shaker.",
-        "Adicione o rum de especiarias e gelo, e agite bem.",
+        "Macere ligeiramente duas folhas de manjericão com o sumo de limão e o xarope simples num shaker.",
+        "Adicione 50 ml de rum de especiarias e gelo; agite bem.",
         "Coe para um copo rocks com gelo.",
-        "Complete com água com gás."
+        "Complete com 40 ml de água com gás e sirva."
       ]
     }
   },
   {
     "id": "juniper-gin",
-    "name": {"en":"Blackberry and juniper gin", "pt":"Gin de amora e zimbro" },
+    "name": {
+      "en": "Blackberry and juniper gin",
+      "pt": "Gin de amora e zimbro"
+    },
     "image": "images/juniper-gin.jpg",
     "glass": "gin",
     "ice": true,
     "ingredients": [
-      {"name": {"en": "Gin", "pt": "Gin"}, "quantity": "50 ml"},
-      {"name": {"en": "Water", "pt": "Água"}, "quantity": "100 ml"},
-      {"name": {"en": "Sugar", "pt": "Açucar"}, "quantity": "50 g"},
-      {"name": {"en": "Juniper", "pt": "Zimbro"}, "quantity": "100 g"},
-      {"name": {"en": "Blackberries", "pt": "Amoras"}, "quantity": "200 g"},
-      {"name": {"en": "Soda Water", "pt": "Água com Gás"}, "quantity": "200 ml"}
+      {
+        "name": {
+          "en": "Gin",
+          "pt": "Gin"
+        },
+        "quantity": "50 ml"
+      },
+      {
+        "name": {
+          "en": "Water",
+          "pt": "Água"
+        },
+        "quantity": "25 ml"
+      },
+      {
+        "name": {
+          "en": "Sugar",
+          "pt": "Açucar"
+        },
+        "quantity": "12 g"
+      },
+      {
+        "name": {
+          "en": "Juniper",
+          "pt": "Zimbro"
+        },
+        "quantity": "2 g"
+      },
+      {
+        "name": {
+          "en": "Blackberries",
+          "pt": "Amoras"
+        },
+        "quantity": "40 g"
+      },
+      {
+        "name": {
+          "en": "Soda Water",
+          "pt": "Água com Gás"
+        },
+        "quantity": "150 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "In a saucepan, combine water, sugar, juniper berries, and blackberries to make a syrup, then let it cool.",
-        "Fill a gin glass with ice.",
-        "Add the gin and a measure of the blackberry-juniper syrup.",
-        "Top with soda water and stir gently."
+        "Gently simmer 40 g blackberries, 2 g lightly crushed juniper berries, 12 g sugar and 25 ml water for a few minutes to make a small batch of syrup.",
+        "Cool and strain the syrup; measure approximately 25 ml of the strained syrup for this drink.",
+        "Fill a gin balloon glass with ice; add 50 ml gin and 25 ml blackberry-juniper syrup.",
+        "Top with 150 ml soda water, stir gently and serve."
       ],
       "pt": [
-        "Numa panela, misture a água, o açúcar, as bagas de zimbro e as amoras para fazer um xarope e deixe arrefecer.",
-        "Encha um copo de gin com gelo.",
-        "Adicione o gin e uma medida do xarope de amora e zimbro.",
-        "Complete com água com gás e mexa suavemente."
+        "Leve ao lume brando 40 g de amoras, 2 g de bagas de zimbro ligeiramente esmagadas, 12 g de açúcar e 25 ml de água durante alguns minutos para fazer uma pequena dose de xarope.",
+        "Deixe arrefecer e coe o xarope; meça aproximadamente 25 ml para esta bebida.",
+        "Encha um copo de gin balão com gelo; adicione 50 ml de gin e 25 ml de xarope de amoras e zimbro.",
+        "Complete com 150 ml de água com gás, mexa suavemente e sirva."
       ]
     }
   },
   {
     "id": "irish-coffee",
-    "name": { "en": "Irish Coffee", "pt": "Irish Coffee" },
+    "name": {
+      "en": "Irish Coffee",
+      "pt": "Irish Coffee"
+    },
     "image": "images/irish-coffee.jpg",
     "glass": "mug",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Whiskey", "pt": "Whiskey" }, "quantity": "45 ml" },
-      { "name": { "en": "Coffee", "pt": "Café" }, "quantity": "120 ml" },
-      { "name": { "en": "Sugar", "pt": "Açucar" }, "quantity": "1 bar spoon" },
-      { "name": { "en": "Cream", "pt": "Natas" }, "quantity": "30 ml" }
+      {
+        "name": {
+          "en": "Whiskey",
+          "pt": "Whiskey"
+        },
+        "quantity": "45 ml"
+      },
+      {
+        "name": {
+          "en": "Coffee",
+          "pt": "Café"
+        },
+        "quantity": "120 ml"
+      },
+      {
+        "name": {
+          "en": "Sugar",
+          "pt": "Açucar"
+        },
+        "quantity": "1 bar spoon"
+      },
+      {
+        "name": {
+          "en": "Cream",
+          "pt": "Natas"
+        },
+        "quantity": "30 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -545,16 +1062,49 @@
   },
   {
     "id": "bloody-mary",
-    "name": { "en": "Classic Bloody Mary", "pt": "Bloody Mary Clássico" },
+    "name": {
+      "en": "Classic Bloody Mary",
+      "pt": "Bloody Mary Clássico"
+    },
     "image": "images/bloody-mary.jpg",
     "glass": "highball",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Vodka", "pt": "Vodka" }, "quantity": "45 ml" },
-      { "name": { "en": "Tomato Juice", "pt": "Sumo de Tomate" }, "quantity": "90 ml" },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "15 ml" },
-      { "name": { "en": "Worcestershire Sauce", "pt": "Molho Inglês" }, "quantity": "q.b." },
-      { "name": { "en": "Tabasco", "pt": "Tabasco" }, "quantity": "q.b." }
+      {
+        "name": {
+          "en": "Vodka",
+          "pt": "Vodka"
+        },
+        "quantity": "45 ml"
+      },
+      {
+        "name": {
+          "en": "Tomato Juice",
+          "pt": "Sumo de Tomate"
+        },
+        "quantity": "90 ml"
+      },
+      {
+        "name": {
+          "en": "Lemon Juice",
+          "pt": "Sumo de Limão"
+        },
+        "quantity": "15 ml"
+      },
+      {
+        "name": {
+          "en": "Worcestershire Sauce",
+          "pt": "Molho Inglês"
+        },
+        "quantity": "q.b."
+      },
+      {
+        "name": {
+          "en": "Tabasco",
+          "pt": "Tabasco"
+        },
+        "quantity": "q.b."
+      }
     ],
     "preparation": {
       "en": [
@@ -573,14 +1123,35 @@
   },
   {
     "id": "manhattan",
-    "name": { "en": "Manhattan", "pt": "Manhattan" },
+    "name": {
+      "en": "Manhattan",
+      "pt": "Manhattan"
+    },
     "image": "images/manhattan.jpg",
     "glass": "martini",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Whiskey", "pt": "Whiskey" }, "quantity": "60 ml" },
-      { "name": { "en": "Sweet Vermouth", "pt": "Vermute Doce" }, "quantity": "30 ml" },
-      { "name": { "en": "Angostura Bitters", "pt": "Angostura Bitters" }, "quantity": "q.b." }
+      {
+        "name": {
+          "en": "Whiskey",
+          "pt": "Whiskey"
+        },
+        "quantity": "60 ml"
+      },
+      {
+        "name": {
+          "en": "Sweet Vermouth",
+          "pt": "Vermute Doce"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Angostura Bitters",
+          "pt": "Angostura Bitters"
+        },
+        "quantity": "q.b."
+      }
     ],
     "preparation": {
       "en": [
@@ -599,15 +1170,42 @@
   },
   {
     "id": "old-fashioned",
-    "name": { "en": "Classic Old Fashioned", "pt": "Old Fashioned Clássico" },
+    "name": {
+      "en": "Classic Old Fashioned",
+      "pt": "Old Fashioned Clássico"
+    },
     "image": "images/old-fashioned.jpg",
     "glass": "rocks",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Whiskey", "pt": "Whiskey" }, "quantity": "60 ml" },
-      { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "10 ml" },
-      { "name": { "en": "Angostura Bitters", "pt": "Angostura Bitters" }, "quantity": "q.b." },
-      { "name": { "en": "Water", "pt": "Água" }, "quantity": "q.b." }
+      {
+        "name": {
+          "en": "Whiskey",
+          "pt": "Whiskey"
+        },
+        "quantity": "60 ml"
+      },
+      {
+        "name": {
+          "en": "Simple Syrup",
+          "pt": "Xarope Simples"
+        },
+        "quantity": "10 ml"
+      },
+      {
+        "name": {
+          "en": "Angostura Bitters",
+          "pt": "Angostura Bitters"
+        },
+        "quantity": "q.b."
+      },
+      {
+        "name": {
+          "en": "Water",
+          "pt": "Água"
+        },
+        "quantity": "q.b."
+      }
     ],
     "preparation": {
       "en": [
@@ -626,14 +1224,35 @@
   },
   {
     "id": "daiquiri",
-    "name": { "en": "Classic Daiquiri", "pt": "Daiquiri Clássico" },
+    "name": {
+      "en": "Classic Daiquiri",
+      "pt": "Daiquiri Clássico"
+    },
     "image": "images/daiquiri.jpg",
     "glass": "coupe",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "White Rum", "pt": "Rum Branco" }, "quantity": "60 ml" },
-      { "name": { "en": "Lime Juice", "pt": "Sumo de Lima" }, "quantity": "30 ml" },
-      { "name": { "en": "Simple Syrup", "pt": "Xarope Simples" }, "quantity": "20 ml" }
+      {
+        "name": {
+          "en": "White Rum",
+          "pt": "Rum Branco"
+        },
+        "quantity": "60 ml"
+      },
+      {
+        "name": {
+          "en": "Lime Juice",
+          "pt": "Sumo de Lima"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Simple Syrup",
+          "pt": "Xarope Simples"
+        },
+        "quantity": "20 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -650,14 +1269,35 @@
   },
   {
     "id": "penicillin",
-    "name": { "en": "Penicillin", "pt": "Penicillin" },
+    "name": {
+      "en": "Penicillin",
+      "pt": "Penicillin"
+    },
     "image": "images/penicillin.jpg",
     "glass": "rocks",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Whiskey", "pt": "Whiskey" }, "quantity": "60 ml" },
-      { "name": { "en": "Lemon Juice", "pt": "Sumo de Limão" }, "quantity": "20 ml" },
-      { "name": { "en": "Honey-Ginger Syrup", "pt": "Xarope de Mel e Gengibre" }, "quantity": "20 ml" }
+      {
+        "name": {
+          "en": "Whiskey",
+          "pt": "Whiskey"
+        },
+        "quantity": "60 ml"
+      },
+      {
+        "name": {
+          "en": "Lemon Juice",
+          "pt": "Sumo de Limão"
+        },
+        "quantity": "20 ml"
+      },
+      {
+        "name": {
+          "en": "Honey-Ginger Syrup",
+          "pt": "Xarope de Mel e Gengibre"
+        },
+        "quantity": "20 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -674,15 +1314,42 @@
   },
   {
     "id": "el-diablo",
-    "name": { "en": "El Diablo", "pt": "El Diablo" },
+    "name": {
+      "en": "El Diablo",
+      "pt": "El Diablo"
+    },
     "image": "images/el-diablo.jpg",
     "glass": "highball",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Tequila", "pt": "Tequila" }, "quantity": "45 ml" },
-      { "name": { "en": "Crème de Cassis", "pt": "Crème de Cassis" }, "quantity": "15 ml" },
-      { "name": { "en": "Lime Juice", "pt": "Sumo de Lima" }, "quantity": "15 ml" },
-      { "name": { "en": "Ginger Beer", "pt": "Cerveja de Gengibre" }, "quantity": "q.b." }
+      {
+        "name": {
+          "en": "Tequila",
+          "pt": "Tequila"
+        },
+        "quantity": "45 ml"
+      },
+      {
+        "name": {
+          "en": "Crème de Cassis",
+          "pt": "Crème de Cassis"
+        },
+        "quantity": "15 ml"
+      },
+      {
+        "name": {
+          "en": "Lime Juice",
+          "pt": "Sumo de Lima"
+        },
+        "quantity": "15 ml"
+      },
+      {
+        "name": {
+          "en": "Ginger Beer",
+          "pt": "Cerveja de Gengibre"
+        },
+        "quantity": "q.b."
+      }
     ],
     "preparation": {
       "en": [

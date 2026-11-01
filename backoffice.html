@@ -35,7 +35,70 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* Missing cocktails tab */
+    /* Drink type controls shared by Ingredients, Missing drinks and Recipes. */
+    .bo-filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .bo-filter-field { display: flex; flex-direction: column; gap: 0.45rem; }
+    .bo-filter-label {
+      color: var(--cream-dim);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .bo-filter-select, .bo-recipe-search {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.84rem;
+      padding: 0.72rem 0.85rem;
+      min-height: 2.8rem;
+    }
+    .bo-filter-select { min-width: 11rem; }
+    .bo-recipe-search { width: min(100%, 24rem); }
+    .bo-recipe-search::placeholder { color: var(--cream-dim); opacity: 0.75; }
+    .bo-filter-select:focus-visible, .bo-recipe-search:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+    .ingredient-check-row[hidden] { display: none !important; }
+
+    /* The Recipes tab shows both measurements and preparation instructions. */
+    .bo-recipe-ingredients {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+      gap: 0.45rem 1.1rem;
+      padding: 0;
+      margin: 0 0 1rem;
+      list-style: none;
+    }
+    .bo-recipe-ingredients li {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--cream);
+      font-size: 0.85rem;
+    }
+    .bo-recipe-quantity { color: var(--gold-dim); text-align: right; }
+    .bo-optional { opacity: 0.68; }
+    .bo-recipe-subheading {
+      font-size: 0.72rem;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Missing drinks tab */
     .cocktail-missing-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -168,6 +231,11 @@
       color: var(--gold-dim);
       opacity: 0.7;
     }
+    @media (max-width: 640px) {
+      .tabs { overflow-x: auto; }
+      .tab-btn { white-space: nowrap; padding: 0.75rem 0.8rem; }
+      .bo-recipe-search { width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -213,7 +281,7 @@
 
       <div class="tabs">
         <button class="tab-btn active" data-tab="ingredients" data-i18n="bo_tab_ingredients">Ingredients</button>
-        <button class="tab-btn" data-tab="missing" data-i18n="bo_tab_missing">Missing cocktails</button>
+        <button class="tab-btn" data-tab="missing" data-i18n="bo_tab_missing">Missing drinks</button>
         <button class="tab-btn" data-tab="shopping" data-i18n="bo_tab_shopping">Shopping list</button>
         <button class="tab-btn" data-tab="recipes" data-i18n="bo_tab_recipes">Recipes</button>
       </div>
@@ -223,6 +291,16 @@
         <p class="section-label" style="margin-bottom:1rem;" data-i18n="bo_ingredients_desc_short">
           Tick the ingredients you currently have in stock. Shared across cocktails and coffee.
         </p>
+        <div class="bo-filter-row">
+          <div class="bo-filter-field">
+            <label class="bo-filter-label" for="ingredients-type-filter" data-i18n="bo_filter_type">Drink type</label>
+            <select class="bo-filter-select" id="ingredients-type-filter" data-drink-filter>
+              <option value="all" data-i18n="bo_filter_all">All drinks</option>
+              <option value="cocktail" data-i18n="bo_filter_cocktails">Cocktails</option>
+              <option value="coffee" data-i18n="bo_filter_coffee">Coffee</option>
+            </select>
+          </div>
+        </div>
         <div class="bo-controls">
           <button class="btn-ghost" id="select-all-btn" data-i18n="bo_select_all">Select all</button>
           <button class="btn-ghost" id="deselect-all-btn" data-i18n="bo_deselect_all">Deselect all</button>
@@ -237,8 +315,18 @@
         </div>
       </div>
 
-      <!-- Tab 2: Missing cocktails -->
+      <!-- Tab 2: Missing drinks -->
       <div class="tab-panel" id="tab-missing">
+        <div class="bo-filter-row">
+          <div class="bo-filter-field">
+            <label class="bo-filter-label" for="missing-type-filter" data-i18n="bo_filter_type">Drink type</label>
+            <select class="bo-filter-select" id="missing-type-filter" data-drink-filter>
+              <option value="all" data-i18n="bo_filter_all">All drinks</option>
+              <option value="cocktail" data-i18n="bo_filter_cocktails">Cocktails</option>
+              <option value="coffee" data-i18n="bo_filter_coffee">Coffee</option>
+            </select>
+          </div>
+        </div>
         <div id="missing-panel"></div>
       </div>
 
@@ -253,6 +341,22 @@
 
       <!-- Tab 4: Recipes -->
       <div class="tab-panel" id="tab-recipes">
+        <div class="bo-filter-row">
+          <div class="bo-filter-field">
+            <label class="bo-filter-label" for="recipes-type-filter" data-i18n="bo_filter_type">Drink type</label>
+            <select class="bo-filter-select" id="recipes-type-filter" data-drink-filter>
+              <option value="all" data-i18n="bo_filter_all">All drinks</option>
+              <option value="cocktail" data-i18n="bo_filter_cocktails">Cocktails</option>
+              <option value="coffee" data-i18n="bo_filter_coffee">Coffee</option>
+            </select>
+          </div>
+          <div class="bo-filter-field" style="flex:1;min-width:13rem;">
+            <label class="bo-filter-label" for="recipe-search" data-i18n="bo_recipe_search_label">Search recipes</label>
+            <input id="recipe-search" class="bo-recipe-search" type="search"
+                   autocomplete="off" data-i18n-placeholder="bo_recipe_search_placeholder"
+                   placeholder="Search drinks in English or Portuguese" />
+          </div>
+        </div>
         <div id="recipes-panel"></div>
       </div>
 
@@ -268,6 +372,39 @@
       const TYPE_ICONS = { cocktail: "🍸", coffee: "☕" };
 
       let _drinks = null;
+      let drinkFilter = "all";
+
+      // Backoffice-only translations. The site's shared i18n.js remains unchanged.
+      Object.assign(TRANSLATIONS.en, {
+        bo_tab_missing: "Missing drinks",
+        bo_filter_type: "Drink type",
+        bo_filter_all: "All drinks",
+        bo_filter_cocktails: "Cocktails",
+        bo_filter_coffee: "Coffee",
+        bo_drink_singular: "drink",
+        bo_drink_plural: "drinks",
+        bo_recipe_search_label: "Search recipes",
+        bo_recipe_search_placeholder: "Search drinks in English or Portuguese",
+        bo_recipe_no_results: "No drinks match your search.",
+        bo_recipe_ingredients_label: "Ingredients",
+        bo_recipe_preparation_label: "Preparation",
+        bo_optional_label: "optional"
+      });
+      Object.assign(TRANSLATIONS.pt, {
+        bo_tab_missing: "Bebidas em falta",
+        bo_filter_type: "Tipo de bebida",
+        bo_filter_all: "Todas as bebidas",
+        bo_filter_cocktails: "Cocktails",
+        bo_filter_coffee: "Cafés",
+        bo_drink_singular: "bebida",
+        bo_drink_plural: "bebidas",
+        bo_recipe_search_label: "Pesquisar receitas",
+        bo_recipe_search_placeholder: "Pesquisar bebidas em português ou inglês",
+        bo_recipe_no_results: "Nenhuma bebida corresponde à pesquisa.",
+        bo_recipe_ingredients_label: "Ingredientes",
+        bo_recipe_preparation_label: "Preparação",
+        bo_optional_label: "opcional"
+      });
       applyTranslations();
       initLangToggle("lang-toggle");
 
@@ -299,7 +436,7 @@
           body: JSON.stringify("__verify__")
         });
         if (res.ok) {
-          sessionStorage.setItem("bo_hash", hash); // store hash for saves later
+          sessionStorage.setItem("bo_hash", hash);
           pwError.classList.remove("visible");
           unlock();
         } else {
@@ -329,6 +466,39 @@
         });
       });
 
+      // Keep drink type selection consistent across the three filtered tabs.
+      // Ingredient checkboxes stay mounted even when hidden, so saving always
+      // includes the full shared ingredient pool, never just the visible type.
+      document.querySelectorAll("[data-drink-filter]").forEach(select => {
+        select.addEventListener("change", () => {
+          drinkFilter = select.value;
+          document.querySelectorAll("[data-drink-filter]").forEach(other => {
+            other.value = drinkFilter;
+          });
+          updateIngredientVisibility();
+          if (document.getElementById("tab-missing").classList.contains("active")) renderMissing();
+          if (document.getElementById("tab-recipes").classList.contains("active")) renderRecipes();
+        });
+      });
+      document.getElementById("recipe-search").addEventListener("input", renderRecipes);
+
+      function matchesDrinkType(drink) {
+        return drinkFilter === "all" || drink._type === drinkFilter;
+      }
+
+      function normaliseSearch(value) {
+        return String(value || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLocaleLowerCase();
+      }
+
+      function safeHTML(value) {
+        return String(value ?? "").replace(/[&<>"']/g, char => ({
+          "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+        })[char]);
+      }
+
       // ── Shared state ──────────────────────────────────
       // One combined list of cocktails + coffee, each item tagged with
       // _type ("cocktail" | "coffee"), since ingredient availability is a
@@ -349,10 +519,18 @@
       }
 
       // ── Tab 1: Ingredients ────────────────────────────
+      function updateIngredientVisibility() {
+        document.querySelectorAll("#ingredients-panel .ingredient-check-row").forEach(row => {
+          row.hidden = drinkFilter !== "all" && !row.dataset.types.split(" ").includes(drinkFilter);
+          const count = Number(row.dataset[drinkFilter === "all" ? "total" : drinkFilter]);
+          row.querySelector(".cocktail-count").textContent =
+            `${count} ${t(count === 1 ? "bo_drink_singular" : "bo_drink_plural")}`;
+        });
+      }
+
       async function showMain() {
         document.getElementById("gate-screen").style.display = "none";
         document.getElementById("bo-main").style.display = "";
-
         const panel = document.getElementById("ingredients-panel");
 
         let drinks;
@@ -373,80 +551,91 @@
         }
 
         const ingredientMap = getAllUniqueIngredients(drinks);
-        const savedSet = (savedRaw !== null && savedRaw.length > 0)
+        // [] is a valid saved state: no ingredients in stock.
+        const savedSet = savedRaw !== null
           ? new Set(savedRaw.map(s => s.toLowerCase()))
           : new Set(ingredientMap.keys());
 
-        const usageCount = new Map();
-        ingredientMap.forEach((_, key) => usageCount.set(key, 0));
-        drinks.forEach(c => c.ingredients.forEach(ing => {
-          const k = ing.name.en.toLowerCase();
-          usageCount.set(k, (usageCount.get(k) || 0) + 1);
-        }));
+        const usageCounts = new Map();
+        ingredientMap.forEach((_, key) => usageCounts.set(key, { total: 0, cocktail: 0, coffee: 0 }));
+        drinks.forEach(c => {
+          // A cappuccino uses milk in two states, but it is still one drink.
+          const keys = new Set(c.ingredients.map(ing => ingredientKey(ing.name.en)));
+          keys.forEach(key => {
+            const counts = usageCounts.get(key);
+            if (counts) {
+              counts.total++;
+              counts[c._type]++;
+            }
+          });
+        });
 
         panel.innerHTML = "";
         [...ingredientMap.entries()].sort((a, b) => a[0].localeCompare(b[0])).forEach(([key, names]) => {
-          const label   = names[lang] || names.en;
-          const count   = usageCount.get(key) || 0;
+          const label   = safeHTML(names[lang] || names.en);
+          const counts  = usageCounts.get(key);
           const checked = savedSet.has(key);
           const row = document.createElement("label");
           row.className = "ingredient-check-row";
+          row.dataset.types = ["cocktail", "coffee"].filter(type => counts[type] > 0).join(" ");
+          row.dataset.total = String(counts.total);
+          row.dataset.cocktail = String(counts.cocktail);
+          row.dataset.coffee = String(counts.coffee);
           row.innerHTML = `
-            <input type="checkbox" data-key="${key}" ${checked ? "checked" : ""}>
+            <input type="checkbox" data-key="${safeHTML(key)}" ${checked ? "checked" : ""}>
             <span class="ingredient-check-label">${label}</span>
-            <span class="cocktail-count">${count} drink${count !== 1 ? "s" : ""}</span>
+            <span class="cocktail-count"></span>
           `;
           panel.appendChild(row);
         });
-
-        document.getElementById("select-all-btn").addEventListener("click", () => {
-          panel.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = true);
-        });
-        document.getElementById("deselect-all-btn").addEventListener("click", () => {
-          panel.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = false);
-        });
-
-        const saveBtn    = document.getElementById("save-btn");
-        const saveStatus = document.getElementById("save-status");
-        saveBtn.addEventListener("click", async () => {
-          const hash = sessionStorage.getItem("bo_hash");
-          if (!hash) {
-            lock();
-            return;
-          }
-          const checked = [...panel.querySelectorAll("input[type=checkbox]:checked")].map(cb => cb.dataset.key);
-          saveBtn.disabled = true;
-          const status = await setAvailableIngredients(new Set(checked), hash);
-          saveBtn.disabled = false;
-          if (status === 200) {
-            saveStatus.style.color = "var(--success)";
-            saveStatus.textContent = t("bo_saved");
-          } else if (status === 401) {
-            // Hash mismatch — session invalid, force re-login
-            lock();
-            return;
-          } else {
-            saveStatus.style.color = "var(--danger)";
-            saveStatus.textContent = `${t("detail_error")} (HTTP ${status})`;
-          }
-          saveStatus.classList.add("visible");
-          setTimeout(() => saveStatus.classList.remove("visible"), 2500);
-        });
+        updateIngredientVisibility();
       }
 
-      // ── Tab 2: Missing cocktails ───────────────────────
+      // Apply bulk changes only to currently visible rows. Hidden rows retain
+      // their checkbox state, and are included on save.
+      function setVisibleIngredients(checked) {
+        document.querySelectorAll("#ingredients-panel .ingredient-check-row:not([hidden]) input[type=checkbox]")
+          .forEach(cb => { cb.checked = checked; });
+      }
+      document.getElementById("select-all-btn").addEventListener("click", () => setVisibleIngredients(true));
+      document.getElementById("deselect-all-btn").addEventListener("click", () => setVisibleIngredients(false));
+
+      const saveBtn    = document.getElementById("save-btn");
+      const saveStatus = document.getElementById("save-status");
+      saveBtn.addEventListener("click", async () => {
+        const hash = sessionStorage.getItem("bo_hash");
+        if (!hash) { lock(); return; }
+        const checked = [...document.querySelectorAll("#ingredients-panel input[type=checkbox]:checked")]
+          .map(cb => cb.dataset.key);
+        saveBtn.disabled = true;
+        const status = await setAvailableIngredients(new Set(checked), hash);
+        saveBtn.disabled = false;
+        if (status === 200) {
+          saveStatus.style.color = "var(--success)";
+          saveStatus.textContent = t("bo_saved");
+        } else if (status === 401) {
+          lock();
+          return;
+        } else {
+          saveStatus.style.color = "var(--danger)";
+          saveStatus.textContent = `${t("detail_error")} (HTTP ${status})`;
+        }
+        saveStatus.classList.add("visible");
+        setTimeout(() => saveStatus.classList.remove("visible"), 2500);
+      });
+
+      // ── Tab 2: Missing drinks ─────────────────────────
       async function renderMissing() {
         const panel = document.getElementById("missing-panel");
         panel.innerHTML = "";
-
         let drinks;
         try { drinks = await getDrinks(); }
         catch { panel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json / coffees.json</p>"; return; }
 
         const availableRaw = await getAvailableIngredients();
-        const availableSet = (availableRaw !== null && availableRaw.length > 0) ? new Set(availableRaw.map(s => s.toLowerCase())) : null;
-
-        const unavailable  = drinks.filter(c => !cocktailIsAvailable(c, availableSet));
+        const availableSet = availableRaw !== null
+          ? new Set(availableRaw.map(s => s.toLowerCase())) : null;
+        const unavailable = drinks.filter(c => matchesDrinkType(c) && !cocktailIsAvailable(c, availableSet));
 
         if (unavailable.length === 0) {
           panel.innerHTML = `<p class="all-available">${t("bo_all_available")}</p>`;
@@ -458,14 +647,13 @@
           const icon = TYPE_ICONS[c._type] || "";
           const card = document.createElement("div");
           card.className = "cocktail-missing-card";
-
           const badges = c.ingredients.map(ing => {
             const ingName = ing.name[lang] || ing.name.en;
-            const ingKey  = ing.name.en.toLowerCase();
-            const owned   = availableSet === null || availableSet.has(ingKey);
-            return `<span class="ing-badge ${owned ? "have" : "missing"}">${ingName}</span>`;
+            const ingKey  = ingredientKey(ing.name.en);
+            const owned   = ing.optional === true || availableSet === null || availableSet.has(ingKey);
+            const label   = ing.optional === true ? ` (${t("bo_optional_label")})` : "";
+            return `<span class="ing-badge ${owned ? "have" : "missing"}">${safeHTML(ingName + label)}</span>`;
           }).join("");
-
           card.innerHTML = `
             <div class="cocktail-missing-name"><span class="type-icon">${icon}</span>${name}</div>
             <div class="missing-ingredients">${badges}</div>
@@ -476,8 +664,8 @@
 
       // ── Tab 3: Shopping list ───────────────────────────
       async function renderShopping() {
-        const cocktailsPanel  = document.getElementById("shopping-cocktails-panel");
-        const listPanel       = document.getElementById("shopping-list-panel");
+        const cocktailsPanel = document.getElementById("shopping-cocktails-panel");
+        const listPanel      = document.getElementById("shopping-list-panel");
         cocktailsPanel.innerHTML = "";
         listPanel.innerHTML = "";
 
@@ -486,7 +674,8 @@
         catch { cocktailsPanel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json / coffees.json</p>"; return; }
 
         const availableRaw = await getAvailableIngredients();
-        const availableSet = (availableRaw !== null && availableRaw.length > 0) ? new Set(availableRaw.map(s => s.toLowerCase())) : null;
+        const availableSet = availableRaw !== null
+          ? new Set(availableRaw.map(s => s.toLowerCase())) : null;
         const unavailable  = drinks.filter(c => !cocktailIsAvailable(c, availableSet));
         const planned      = getPlannedSet();
 
@@ -500,8 +689,8 @@
           const name         = c.name[lang] || c.name.en;
           const icon         = TYPE_ICONS[c._type] || "";
           const missingCount = c.ingredients.filter(ing => {
-            const k = ing.name.en.toLowerCase();
-            return availableSet !== null && !availableSet.has(k);
+            const k = ingredientKey(ing.name.en);
+            return ing.optional !== true && availableSet !== null && !availableSet.has(k);
           }).length;
 
           const row = document.createElement("label");
@@ -520,7 +709,6 @@
           });
           cocktailsPanel.appendChild(row);
         });
-
         renderShoppingList(drinks, availableSet);
       }
 
@@ -528,7 +716,6 @@
         const listPanel = document.getElementById("shopping-list-panel");
         listPanel.innerHTML = "";
         const planned = getPlannedSet();
-
         if (planned.size === 0) {
           listPanel.innerHTML = `<div class="shopping-list"><p class="shopping-empty">${t("bo_shopping_empty")}</p></div>`;
           return;
@@ -540,22 +727,22 @@
         drinks.filter(c => planned.has(c.id)).forEach(c => {
           const cocktailName = c.name[lang] || c.name.en;
           c.ingredients.forEach(ing => {
-            const key    = ing.name.en.toLowerCase();
-            const owned  = availableSet !== null && availableSet.has(key);
-            if (!owned) {
+            const key   = ingredientKey(ing.name.en);
+            const owned = availableSet !== null && availableSet.has(key);
+            if (!owned && ing.optional !== true) {
               if (!neededMap.has(key)) {
                 neededMap.set(key, { name: ing.name[lang] || ing.name.en, cocktails: [] });
               }
-              neededMap.get(key).cocktails.push(cocktailName);
+              if (!neededMap.get(key).cocktails.includes(cocktailName)) {
+                neededMap.get(key).cocktails.push(cocktailName);
+              }
             }
           });
         });
-
         if (neededMap.size === 0) {
           listPanel.innerHTML = `<div class="shopping-list"><p class="shopping-empty" style="color:var(--success);opacity:1;">${t("bo_all_owned")}</p></div>`;
           return;
         }
-
         const items = [...neededMap.entries()]
           .sort((a, b) => a[0].localeCompare(b[0]))
           .map(([, v]) => `
@@ -564,7 +751,6 @@
               <span class="shopping-item-cocktails">${t("bo_needed_for")}: ${v.cocktails.join(", ")}</span>
             </div>
           `).join("");
-
         listPanel.innerHTML = `
           <div class="shopping-list">
             <div class="shopping-list-header">${t("bo_tab_shopping")} — ${neededMap.size} item${neededMap.size !== 1 ? "s" : ""}</div>
@@ -576,32 +762,51 @@
       // ── Tab 4: Recipes ─────────────────────────────────
       async function renderRecipes() {
         const panel = document.getElementById("recipes-panel");
+        const query = normaliseSearch(document.getElementById("recipe-search").value.trim());
         panel.innerHTML = "";
-
         let drinks;
         try { drinks = await getDrinks(); }
         catch { panel.innerHTML = "<p style='color:var(--cream-dim)'>Failed to load cocktails.json / coffees.json</p>"; return; }
 
-        [...drinks]
-          .sort((a, b) => (a.name[lang] || a.name.en).localeCompare(b.name[lang] || b.name.en))
-          .forEach(c => {
-            const name  = c.name[lang] || c.name.en;
-            const icon  = TYPE_ICONS[c._type] || "";
-            const steps = (c.preparation && c.preparation[lang]) || (c.preparation && c.preparation.en) || [];
+        const matching = drinks
+          .filter(c => matchesDrinkType(c))
+          .filter(c => !query || [c.name.en, c.name.pt, c.id].some(value => normaliseSearch(value).includes(query)))
+          .sort((a, b) => (a.name[lang] || a.name.en).localeCompare(b.name[lang] || b.name.en));
 
-            const card = document.createElement("div");
-            card.className = "cocktail-missing-card";
-
-            const stepsHtml = steps.length
-              ? `<ol class="recipe-steps">${steps.map(s => `<li>${s}</li>`).join("")}</ol>`
-              : `<p class="recipe-empty">${t("bo_recipe_none")}</p>`;
-
-            card.innerHTML = `
-              <div class="cocktail-missing-name"><span class="type-icon">${icon}</span>${name}</div>
-              ${stepsHtml}
-            `;
-            panel.appendChild(card);
-          });
+        if (matching.length === 0) {
+          panel.innerHTML = `<p class="all-available">${t("bo_recipe_no_results")}</p>`;
+          return;
+        }
+        matching.forEach(c => {
+          const name  = c.name[lang] || c.name.en;
+          const icon  = TYPE_ICONS[c._type] || "";
+          const steps = (c.preparation && c.preparation[lang]) || (c.preparation && c.preparation.en) || [];
+          const card = document.createElement("div");
+          card.className = "cocktail-missing-card";
+          const stepsHtml = steps.length
+            ? `<ol class="recipe-steps">${steps.map(s => `<li>${safeHTML(s)}</li>`).join("")}</ol>`
+            : `<p class="recipe-empty">${t("bo_recipe_none")}</p>`;
+          const ingredientsHtml = c.ingredients.map(ing => {
+            const ingName = ing.name[lang] || ing.name.en;
+            const modifier = ing.modifier ? (ing.modifier[lang] || ing.modifier.en) : "";
+            const quantity = typeof ing.quantity === "object"
+              ? (ing.quantity[lang] || ing.quantity.en || "") : ing.quantity;
+            const optional = ing.optional === true ? ` (${t("bo_optional_label")})` : "";
+            const detail = modifier ? ` (${modifier})` : "";
+            return `<li class="${ing.optional ? "bo-optional" : ""}">
+              <span>${safeHTML(ingName + optional)}</span>
+              <span class="bo-recipe-quantity">${safeHTML(String(quantity) + detail)}</span>
+            </li>`;
+          }).join("");
+          card.innerHTML = `
+            <div class="cocktail-missing-name"><span class="type-icon">${icon}</span>${safeHTML(name)}</div>
+            <p class="bo-recipe-subheading">${t("bo_recipe_ingredients_label")}</p>
+            <ul class="bo-recipe-ingredients">${ingredientsHtml}</ul>
+            <p class="bo-recipe-subheading">${t("bo_recipe_preparation_label")}</p>
+            ${stepsHtml}
+          `;
+          panel.appendChild(card);
+        });
       }
 
     })();

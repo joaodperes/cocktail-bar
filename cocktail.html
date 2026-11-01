@@ -49,6 +49,23 @@
       const homeUrl = `index.html?menu=${menu}`;
       document.getElementById("nav-brand").href = homeUrl;
 
+      // Modifiers describe the preparation of an ingredient without creating
+      // duplicate inventory items (e.g. water/hot water or milk/milk foam).
+      const optionalText = lang === "pt" ? "opcional" : "optional";
+      function safeHTML(value) {
+        return String(value ?? "").replace(/[&<>"']/g, character => ({
+          "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+        })[character]);
+      }
+      function ingredientQuantity(ing) {
+        const modifier = ing.modifier && (ing.modifier[lang] || ing.modifier.en);
+        const optional = ing.optional === true;
+        const notes = [modifier, optional ? optionalText : ""].filter(Boolean);
+        const quantity = typeof ing.quantity === "object"
+          ? (ing.quantity[lang] || ing.quantity.en || "") : ing.quantity;
+        return `${safeHTML(quantity)}${notes.length ? ` (${safeHTML(notes.join(", "))})` : ""}`;
+      }
+
       async function render() {
         const container = document.getElementById("detail-content");
 
@@ -77,15 +94,15 @@
         const icon = GLASS_ICONS[c.glass] || "🍹";
 
         const imgHtml = c.image
-          ? `<img class="detail-image" src="${c.image}" alt="${name}" onerror="this.outerHTML='<div class=\\'detail-image-placeholder\\'>${icon}</div>'">`
+          ? `<img class="detail-image" src="${safeHTML(c.image)}" alt="${safeHTML(name)}" onerror="this.outerHTML='<div class=\\'detail-image-placeholder\\'>${icon}</div>'">`
           : `<div class="detail-image-placeholder">${icon}</div>`;
 
         const ingredientsHtml = c.ingredients.map(ing => {
           const ingName = ing.name[lang] || ing.name.en;
           return `
             <li class="ingredient-row">
-              <span class="ingredient-name">${ingName}</span>
-              <span class="ingredient-qty">${ing.quantity}</span>
+              <span class="ingredient-name">${safeHTML(ingName)}</span>
+              <span class="ingredient-qty">${ingredientQuantity(ing)}</span>
             </li>`;
         }).join("");
 
@@ -94,7 +111,7 @@
 
           ${imgHtml}
 
-          <h1 class="detail-title">${name}</h1>
+          <h1 class="detail-title">${safeHTML(name)}</h1>
           <div class="detail-badges">
             <span class="badge">${glassLabel}</span>
             <span class="badge ${c.ice ? "ice" : ""}">${c.ice ? t("detail_ice_yes") : t("detail_ice_no")}</span>
@@ -122,7 +139,7 @@
                   name="requester"
                   maxlength="80"
                   autocomplete="given-name"
-                  placeholder="${t("detail_name_placeholder")}"
+                  placeholder="${t("detail_name_placeholder")}" 
                 />
               </div>
               <p class="form-error" id="form-error"></p>

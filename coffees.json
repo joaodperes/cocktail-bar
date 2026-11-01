@@ -1,33 +1,63 @@
 [
   {
     "id": "espresso",
-    "name": { "en": "Espresso", "pt": "Espresso" },
+    "name": {
+      "en": "Espresso",
+      "pt": "Espresso"
+    },
     "image": "images/espresso.jpg",
     "glass": "cup",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" }
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "30 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "Pull a single shot of espresso directly into a warmed cup.",
-        "Serve immediately."
+        "Warm a demitasse and grind 7–9 g of coffee finely for an espresso machine.",
+        "Extract a single shot of approximately 30 ml in around 25–30 seconds.",
+        "Serve immediately while the crema is intact."
       ],
       "pt": [
-        "Tire uma dose de espresso directamente para uma chávena quente.",
-        "Sirva de imediato."
+        "Aqueça uma chávena pequena e moa finamente 7–9 g de café para máquina de espresso.",
+        "Extraia uma dose de cerca de 30 ml em aproximadamente 25–30 segundos.",
+        "Sirva imediatamente, preservando a crema."
       ]
     }
   },
   {
     "id": "americano",
-    "name": { "en": "Americano", "pt": "Americano" },
+    "name": {
+      "en": "Americano",
+      "pt": "Americano"
+    },
     "image": "images/americano.jpg",
     "glass": "cup",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
-      { "name": { "en": "Hot Water", "pt": "Água Quente" }, "quantity": "120 ml" }
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Water",
+          "pt": "Água"
+        },
+        "quantity": "120 ml",
+        "modifier": {
+          "en": "Hot",
+          "pt": "Quente"
+        }
+      }
     ],
     "preparation": {
       "en": [
@@ -44,14 +74,43 @@
   },
   {
     "id": "cappuccino",
-    "name": { "en": "Cappuccino", "pt": "Cappuccino" },
+    "name": {
+      "en": "Cappuccino",
+      "pt": "Cappuccino"
+    },
     "image": "images/cappuccino.jpg",
     "glass": "cup",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
-      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "60 ml" },
-      { "name": { "en": "Milk Foam", "pt": "Espuma de Leite" }, "quantity": "60 ml" }
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Milk",
+          "pt": "Leite"
+        },
+        "quantity": "60 ml",
+        "modifier": {
+          "en": "Steamed",
+          "pt": "Vaporizado"
+        }
+      },
+      {
+        "name": {
+          "en": "Milk",
+          "pt": "Leite"
+        },
+        "quantity": "60 ml",
+        "modifier": {
+          "en": "Foamed",
+          "pt": "Em espuma"
+        }
+      }
     ],
     "preparation": {
       "en": [
@@ -68,13 +127,28 @@
   },
   {
     "id": "latte",
-    "name": { "en": "Caffè Latte", "pt": "Caffè Latte" },
+    "name": {
+      "en": "Caffè Latte",
+      "pt": "Caffè Latte"
+    },
     "image": "images/latte.jpg",
     "glass": "cup",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
-      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "150 ml" }
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Milk",
+          "pt": "Leite"
+        },
+        "quantity": "150 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -91,13 +165,28 @@
   },
   {
     "id": "flat-white",
-    "name": { "en": "Flat White", "pt": "Flat White" },
+    "name": {
+      "en": "Flat White",
+      "pt": "Flat White"
+    },
     "image": "images/flat-white.jpg",
     "glass": "cup",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "45 ml" },
-      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "90 ml" }
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "45 ml"
+      },
+      {
+        "name": {
+          "en": "Milk",
+          "pt": "Leite"
+        },
+        "quantity": "90 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -114,13 +203,32 @@
   },
   {
     "id": "macchiato",
-    "name": { "en": "Macchiato", "pt": "Macchiato" },
+    "name": {
+      "en": "Macchiato",
+      "pt": "Macchiato"
+    },
     "image": "images/macchiato.jpg",
     "glass": "cup",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
-      { "name": { "en": "Milk Foam", "pt": "Espuma de Leite" }, "quantity": "1 spoon" }
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Milk",
+          "pt": "Leite"
+        },
+        "quantity": "1 spoon",
+        "modifier": {
+          "en": "Foamed",
+          "pt": "Em espuma"
+        }
+      }
     ],
     "preparation": {
       "en": [
@@ -135,37 +243,73 @@
   },
   {
     "id": "mocha",
-    "name": { "en": "Mocha", "pt": "Mocha" },
+    "name": {
+      "en": "Mocha",
+      "pt": "Mocha"
+    },
     "image": "images/mocha.jpg",
     "glass": "mug",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
-      { "name": { "en": "Chocolate Syrup", "pt": "Xarope de Chocolate" }, "quantity": "20 ml" },
-      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "120 ml" }
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Chocolate Syrup",
+          "pt": "Xarope de Chocolate"
+        },
+        "quantity": "20 ml"
+      },
+      {
+        "name": {
+          "en": "Milk",
+          "pt": "Leite"
+        },
+        "quantity": "200 ml"
+      }
     ],
     "preparation": {
       "en": [
-        "Add the chocolate syrup to a mug.",
-        "Pull a shot of espresso on top and stir to combine.",
-        "Steam the milk and pour it in, finishing with a little foam."
+        "Add 20 ml of chocolate syrup to a medium mug.",
+        "Pull a 30 ml espresso over the syrup and stir.",
+        "Steam 200 ml of milk until hot and velvety; pour into the mug and finish with a little foam."
       ],
       "pt": [
-        "Adicione o xarope de chocolate a uma caneca.",
-        "Tire uma dose de espresso por cima e mexa para misturar.",
-        "Vaporize o leite e verta, terminando com um pouco de espuma."
+        "Coloque 20 ml de xarope de chocolate numa caneca média.",
+        "Extraia 30 ml de espresso por cima e mexa.",
+        "Vaporize 200 ml de leite até ficar quente e cremoso; verta para a caneca e finalize com um pouco de espuma."
       ]
     }
   },
   {
     "id": "cortado",
-    "name": { "en": "Cortado", "pt": "Cortado" },
+    "name": {
+      "en": "Cortado",
+      "pt": "Cortado"
+    },
     "image": "images/cortado.jpg",
     "glass": "cup",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
-      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "30 ml" }
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Milk",
+          "pt": "Leite"
+        },
+        "quantity": "30 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -182,13 +326,28 @@
   },
   {
     "id": "affogato",
-    "name": { "en": "Affogato", "pt": "Affogato" },
+    "name": {
+      "en": "Affogato",
+      "pt": "Affogato"
+    },
     "image": "images/affogato.jpg",
     "glass": "coupe",
     "ice": false,
     "ingredients": [
-      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
-      { "name": { "en": "Vanilla Ice Cream", "pt": "Gelado de Baunilha" }, "quantity": "1 scoop" }
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Vanilla Ice Cream",
+          "pt": "Gelado de Baunilha"
+        },
+        "quantity": "1 scoop"
+      }
     ],
     "preparation": {
       "en": [
@@ -203,13 +362,28 @@
   },
   {
     "id": "iced-latte",
-    "name": { "en": "Iced Latte", "pt": "Latte Gelado" },
+    "name": {
+      "en": "Iced Latte",
+      "pt": "Latte Gelado"
+    },
     "image": "images/iced-latte.jpg",
     "glass": "highball",
     "ice": true,
     "ingredients": [
-      { "name": { "en": "Espresso", "pt": "Espresso" }, "quantity": "30 ml" },
-      { "name": { "en": "Milk", "pt": "Leite" }, "quantity": "150 ml" }
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Milk",
+          "pt": "Leite"
+        },
+        "quantity": "150 ml"
+      }
     ],
     "preparation": {
       "en": [
@@ -223,6 +397,214 @@
         "Verta o leite frio.",
         "Tire uma dose de espresso e verta por cima.",
         "Mexa suavemente antes de servir."
+      ]
+    }
+  },
+  {
+    "id": "v60",
+    "name": {
+      "en": "V60 Pour-over",
+      "pt": "Café V60"
+    },
+    "image": null,
+    "glass": "mug",
+    "ice": false,
+    "ingredients": [
+      {
+        "name": {
+          "en": "Ground Coffee",
+          "pt": "Café Moído"
+        },
+        "quantity": "15 g",
+        "modifier": {
+          "en": "Medium-fine grind",
+          "pt": "Moagem média-fina"
+        }
+      },
+      {
+        "name": {
+          "en": "Water",
+          "pt": "Água"
+        },
+        "quantity": "250 ml",
+        "modifier": {
+          "en": "Hot (92–96°C)",
+          "pt": "Quente (92–96°C)"
+        }
+      }
+    ],
+    "preparation": {
+      "en": [
+        "Place a V60 paper filter in the dripper, rinse it with hot water and discard the rinse water.",
+        "Add 15 g of medium-fine ground coffee.",
+        "Pour 40–45 ml of water at 92–96°C and wait 30–45 seconds for the bloom.",
+        "Pour the remaining water slowly in circles until 250 ml total has been added (including the bloom).",
+        "Allow the water to drain, aiming for 2½–3 minutes total brewing time; serve."
+      ],
+      "pt": [
+        "Coloque um filtro de papel no V60, escalde com água quente e descarte essa água.",
+        "Adicione 15 g de café de moagem média-fina.",
+        "Verta 40–45 ml de água a 92–96°C e aguarde 30–45 segundos pela pré-infusão.",
+        "Verta lentamente a restante água em círculos, até perfazer 250 ml no total (incluindo a pré-infusão).",
+        "Deixe terminar a extração, idealmente em 2½–3 minutos no total, e sirva."
+      ]
+    }
+  },
+  {
+    "id": "italian-espresso",
+    "name": {
+      "en": "Italian Espresso (Moka)",
+      "pt": "Café Italiano (Moka)"
+    },
+    "image": null,
+    "glass": "cup",
+    "ice": false,
+    "ingredients": [
+      {
+        "name": {
+          "en": "Ground Coffee",
+          "pt": "Café Moído"
+        },
+        "quantity": "9 g",
+        "modifier": {
+          "en": "Moka grind",
+          "pt": "Moagem para moka"
+        }
+      },
+      {
+        "name": {
+          "en": "Water",
+          "pt": "Água"
+        },
+        "quantity": "60 ml",
+        "modifier": {
+          "en": "Cold",
+          "pt": "Fria"
+        }
+      }
+    ],
+    "preparation": {
+      "en": [
+        "Use a one-cup Bialetti moka pot. Fill the lower chamber with about 60 ml of cold water, stopping below the safety valve.",
+        "Fill the filter basket with approximately 9 g of medium-fine coffee; level it without tamping.",
+        "Assemble the moka pot tightly, then heat over medium-low heat with the lid open if safe.",
+        "Remove from heat as the coffee starts to sputter; close the lid and pour the roughly 40–50 ml brewed coffee into an espresso cup.",
+        "Serve immediately. Do not confuse moka-pot coffee with espresso extracted under pressure by an espresso machine."
+      ],
+      "pt": [
+        "Use uma cafeteira Bialetti moka de uma chávena. Coloque cerca de 60 ml de água fria no depósito inferior, sem ultrapassar a válvula de segurança.",
+        "Encha o funil com aproximadamente 9 g de café de moagem média-fina; nivele sem calcar.",
+        "Monte bem a cafeteira e aqueça em lume médio-baixo, com a tampa aberta se for seguro.",
+        "Retire do lume quando o café começar a borbulhar; feche a tampa e sirva cerca de 40–50 ml numa chávena de café.",
+        "Sirva de imediato. Este café é feito por cafeteira moka, não pela pressão de uma máquina de espresso."
+      ]
+    }
+  },
+  {
+    "id": "aeropress",
+    "name": {
+      "en": "AeroPress",
+      "pt": "AeroPress"
+    },
+    "image": null,
+    "glass": "mug",
+    "ice": false,
+    "ingredients": [
+      {
+        "name": {
+          "en": "Ground Coffee",
+          "pt": "Café Moído"
+        },
+        "quantity": "16 g",
+        "modifier": {
+          "en": "Medium grind",
+          "pt": "Moagem média"
+        }
+      },
+      {
+        "name": {
+          "en": "Water",
+          "pt": "Água"
+        },
+        "quantity": "220 ml",
+        "modifier": {
+          "en": "Hot (~85°C)",
+          "pt": "Quente (~85°C)"
+        }
+      }
+    ],
+    "preparation": {
+      "en": [
+        "Fit an AeroPress paper filter into its cap, rinse, then attach the cap and place the brewer on a sturdy mug.",
+        "Add 16 g of medium-ground coffee.",
+        "Pour in 220 ml of water at about 85°C, then stir gently.",
+        "Insert the plunger slightly to stop dripping and steep for approximately 60 seconds.",
+        "Press gently and steadily into the mug, then serve."
+      ],
+      "pt": [
+        "Coloque um filtro de papel na tampa do AeroPress, escalde-o, monte a tampa e pouse o equipamento sobre uma caneca resistente.",
+        "Adicione 16 g de café de moagem média.",
+        "Verta 220 ml de água a cerca de 85°C e mexa suavemente.",
+        "Introduza ligeiramente o êmbolo para travar o gotejamento e aguarde aproximadamente 60 segundos.",
+        "Pressione lenta e uniformemente para a caneca e sirva."
+      ]
+    }
+  },
+  {
+    "id": "pumpkin-spice-latte",
+    "name": {
+      "en": "Pumpkin Spice Latte",
+      "pt": "Latte de Abóbora e Especiarias"
+    },
+    "image": null,
+    "glass": "mug",
+    "ice": false,
+    "ingredients": [
+      {
+        "name": {
+          "en": "Espresso",
+          "pt": "Espresso"
+        },
+        "quantity": "30 ml"
+      },
+      {
+        "name": {
+          "en": "Milk",
+          "pt": "Leite"
+        },
+        "quantity": "180 ml"
+      },
+      {
+        "name": {
+          "en": "Pumpkin Spice Syrup",
+          "pt": "Xarope de Abóbora e Especiarias"
+        },
+        "quantity": "25 ml"
+      },
+      {
+        "name": {
+          "en": "Sugar",
+          "pt": "Açúcar"
+        },
+        "quantity": {
+          "en": "to taste",
+          "pt": "a gosto"
+        },
+        "optional": true
+      }
+    ],
+    "preparation": {
+      "en": [
+        "Pour 25 ml of ready-made pumpkin spice syrup into a mug.",
+        "Pull 30 ml of espresso and stir it into the syrup.",
+        "Steam 180 ml of milk until smooth and lightly foamed; pour over the espresso.",
+        "Add extra sugar only if desired, and serve. No additional spices or vanilla are required."
+      ],
+      "pt": [
+        "Verta 25 ml de xarope de abóbora e especiarias já preparado numa caneca.",
+        "Extraia 30 ml de espresso e misture com o xarope.",
+        "Vaporize 180 ml de leite até ficar aveludado e ligeiramente espumado; verta sobre o espresso.",
+        "Adicione açúcar apenas se desejar e sirva. Não é necessário acrescentar especiarias nem baunilha."
       ]
     }
   }

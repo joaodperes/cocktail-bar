@@ -3,11 +3,30 @@
 const AVAILABLE_KEY = "available_ingredients";
 const MENU_KEY = "menu_type"; // "cocktail" | "coffee"
 
+// Availability is tracked by the ingredient, not by its temperature, texture,
+// serving size or preparation. These aliases migrate older saved stock keys.
+const INGREDIENT_ALIASES = Object.freeze({
+  "hot water": "water",
+  "milk foam": "milk",
+  "rum": "white rum"
+});
+
+function ingredientKey(name) {
+  const key = String(name || "").trim().toLowerCase();
+  return INGREDIENT_ALIASES[key] || key;
+}
+
+function normaliseAvailableIngredients(values) {
+  if (values === null || !Array.isArray(values)) return null;
+  return [...new Set(values.map(ingredientKey).filter(Boolean))];
+}
+
 async function getAvailableIngredients() {
   try {
     const res = await fetch("/.netlify/functions/get-availability");
+    if (!res.ok) throw new Error("Could not fetch ingredient availability");
     const data = await res.json();
-    return data; // null means never set; array means set
+    return normaliseAvailableIngredients(data); // null means unset; [] means no stock
   } catch {
     return null;
   }
@@ -21,7 +40,7 @@ async function setAvailableIngredients(set, passwordHash) {
         "Content-Type": "application/json",
         "x-password-hash": passwordHash
       },
-      body: JSON.stringify([...set])
+      body: JSON.stringify(normaliseAvailableIngredients([...set]) || [])
     });
     return res.status;
   } catch {
@@ -30,18 +49,18 @@ async function setAvailableIngredients(set, passwordHash) {
 }
 
 function cocktailIsAvailable(cocktail, availableSet) {
-  if (availableSet === null) return true; // backoffice never opened: show all
+  if (availableSet === null) return true; // availability never configured
   return cocktail.ingredients.every(ing => {
-    const name = ing.name.en.toLowerCase();
-    return availableSet.has(name);
+    if (ing.optional === true) return true;
+    return availableSet.has(ingredientKey(ing.name.en));
   });
 }
 
 function getAllUniqueIngredients(cocktails) {
-  const map = new Map(); // en key -> {en, pt}
+  const map = new Map(); // canonical English ingredient key -> {en, pt}
   cocktails.forEach(c => {
     c.ingredients.forEach(ing => {
-      const key = ing.name.en.toLowerCase();
+      const key = ingredientKey(ing.name.en);
       if (!map.has(key)) map.set(key, ing.name);
     });
   });
